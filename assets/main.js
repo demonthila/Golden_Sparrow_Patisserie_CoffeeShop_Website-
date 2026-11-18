@@ -4,15 +4,38 @@
   doc.classList.add('js');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Intro loader: full animation on first visit of the session ---------- */
-  var seen = false;
-  try { seen = sessionStorage.getItem('gs-intro') === '1'; sessionStorage.setItem('gs-intro', '1'); } catch (e) {}
-  if (seen || reduce) { doc.classList.add('no-loader'); }
-  window.addEventListener('load', function () {
-    setTimeout(function () { doc.classList.add('is-loaded'); }, 60);
-  });
-  // safety net if load is slow
-  setTimeout(function () { doc.classList.add('is-loaded'); }, 3500);
+  /* ---------- Intro: logo wipes in at centre, then glides into the header (once per visit) ---------- */
+  var intro = document.querySelector('.intro');
+  var played = doc.classList.contains('intro-done');
+  function startPage() { doc.classList.add('is-loaded'); }
+  if (!intro || played || reduce) {
+    if (intro) intro.remove();
+    setTimeout(startPage, 60);
+  } else {
+    try { sessionStorage.setItem('gs-intro', '1'); } catch (e) {}
+    doc.classList.add('intro-running');
+    var logo = intro.querySelector('.intro__logo');
+    var EASE = 'cubic-bezier(0.76, 0, 0.24, 1)';
+    var go = function () {
+      requestAnimationFrame(function () {
+        logo.style.transition = 'clip-path 1.1s ' + EASE;
+        logo.style.clipPath = 'inset(0 0% 0 0)';
+      });
+      setTimeout(function () {
+        var target = document.querySelector('.nav .logo img');
+        var r = target.getBoundingClientRect(), w = logo.getBoundingClientRect().width;
+        logo.style.transition = 'left 0.9s ' + EASE + ', top 0.9s ' + EASE + ', transform 0.9s ' + EASE;
+        logo.style.left = (r.left + r.width / 2) + 'px';
+        logo.style.top = (r.top + r.height / 2) + 'px';
+        logo.style.transform = 'translate(-50%, -50%) scale(' + (r.width / w) + ')';
+        intro.classList.add('intro--out');
+        setTimeout(startPage, 350);
+        setTimeout(function () { doc.classList.remove('intro-running'); doc.classList.add('intro-done'); intro.remove(); }, 1000);
+      }, 1500);
+    };
+    if (logo.complete) go(); else { logo.addEventListener('load', go); logo.addEventListener('error', go); }
+    setTimeout(function () { if (intro.isConnected) { intro.remove(); doc.classList.remove('intro-running'); startPage(); } }, 6000);
+  }
 
   /* ---------- Smooth scrolling (Lenis), like the reference ---------- */
   if (window.Lenis && !reduce) {

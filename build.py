@@ -109,10 +109,12 @@ def head(title, desc, page, extra=""):
 <link rel="apple-touch-icon" href="assets/img/favicon.png">
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=7">
+<script>try{{if(sessionStorage.getItem('gs-intro'))document.documentElement.classList.add('intro-done')}}catch(e){{}}</script>
+<link rel="stylesheet" href="assets/style.css?v=8">
 {schema()}{extra}
 </head>
 <body>
+<div class="intro" aria-hidden="true"><img class="intro__logo" src="assets/img/logo-wordmark.webp" alt=""></div>
 '''
 
 def nav(active):
@@ -166,7 +168,7 @@ def footer():
   </div>
 </footer>
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/main.js?v=7"></script>
+<script src="assets/main.js?v=8"></script>
 </body>
 </html>
 '''

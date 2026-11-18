@@ -456,3 +456,10 @@ html.lenis, html.lenis body { height: auto; }
 .visit3__img { justify-self: end; width: 100%; max-width: 300px; aspect-ratio: 4 / 5; border-radius: 22px; overflow: hidden; }
 @media (max-width: 960px) { .visit3 { grid-template-columns: 1fr 1fr; } .visit3__img { grid-column: 1 / -1; justify-self: start; max-width: 420px; } }
 @media (max-width: 760px) { .visit3, .head3 { grid-template-columns: 1fr; } }
+
+/* ---------- Intro (logo wipe → glide to header), once per visit ---------- */
+.intro { position: fixed; inset: 0; z-index: 9999; background-color: var(--paper); pointer-events: none; transition: background-color .7s ease .35s; }
+.intro--out { background-color: rgba(255,255,255,0); }
+.intro__logo { position: fixed; left: 50%; top: 50%; width: min(420px, 72vw); height: auto; transform: translate(-50%, -50%) scale(1); transform-origin: 50% 50%; clip-path: inset(0 100% 0 0); will-change: transform, left, top, clip-path; user-select: none; }
+.intro-done .intro { display: none; }
+.intro-running .nav .logo { visibility: hidden; }
