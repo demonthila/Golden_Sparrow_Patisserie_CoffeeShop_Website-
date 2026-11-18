@@ -60,7 +60,7 @@ IMG = {
     "interior": "photo-1555396273-367ea4eb4db5",
     "barista": "photo-1532713107108-dfb5d8d2fc42",
     "shopfront": "photo-1521017432531-fbd92d768814",
-    "footer": "photo-1555396273-367ea4eb4db5",
+    "footer": "photo-1762686852371-763b689910b2",  # coffee plantation hillside
 }
 def src(key, w=1200):
     v = IMG[key]
@@ -110,7 +110,7 @@ def head(title, desc, page, extra=""):
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{{var n=(performance.getEntriesByType('navigation')[0]||{{}}).type,r=document.referrer,i=n==='reload'||!r||new URL(r).origin!==location.origin;if(!i)document.documentElement.classList.add('intro-done')}}catch(e){{}}</script>
-<link rel="stylesheet" href="assets/style.css?v=9">
+<link rel="stylesheet" href="assets/style.css?v=10">
 {schema()}{extra}
 </head>
 <body>
@@ -159,8 +159,8 @@ def footer():
     </div>
   </div>
   <div class="footer__hero">
-    <img src="{src("footer", 2000)}" alt="" loading="lazy" decoding="async">
-    <div class="footer__word" aria-hidden="true"><span data-fit>golden sparrow</span></div>
+    <img class="footer__bg" src="{src("footer", 2000)}" alt="" loading="lazy" decoding="async">
+    <div class="footer__word" aria-hidden="true"><span data-fit data-letters>golden sparrow</span></div>
   </div>
   <div class="wrap footer__bottom">
     <span>© <span data-year>2026</span> {BIZ["name"]}. All rights reserved.</span>
@@ -168,7 +168,7 @@ def footer():
   </div>
 </footer>
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/main.js?v=9"></script>
+<script src="assets/main.js?v=10"></script>
 </body>
 </html>
 '''
@@ -208,7 +208,7 @@ def visit_section():
       <p class="visit3__label">Opening hours</p>
       <table class="hours hours--lg"><tbody>{hours_rows()}</tbody></table>
     </div>
-    <div class="visit3__img" data-reveal="img">{photo("cakedisplay", "Cakes and sweets in the display cabinet at Golden Sparrow", 900)}</div>
+    <div class="visit3__img" data-reveal="img">{photo("cakedisplay", "Cakes and sweets in the display cabinet at Golden Sparrow", 900, cls="par")}</div>
   </div>
 </section>'''
 
@@ -270,8 +270,8 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
       </div>
     </div>
     <div class="room">
-      <div data-reveal="img">{photo("interior", "Warm café interior with wooden tables", 1600)}</div>
-      <div data-reveal="img" style="--d:.12s">{photo("cakedisplay", "Cakes and tarts in the display cabinet", 900)}</div>
+      <div data-reveal="img">{photo("interior", "Warm café interior with wooden tables", 1600, cls="par")}</div>
+      <div data-reveal="img" style="--d:.12s">{photo("cakedisplay", "Cakes and tarts in the display cabinet", 900, cls="par")}</div>
     </div>
   </div>
 </section>
@@ -376,8 +376,8 @@ about = head(f'Our story · {BIZ["name"]}',
 <section class="section" style="padding-top:0" aria-label="How it started">
   <div class="wrap split" style="align-items:start">
     <div class="about-imgs">
-      <div data-reveal="img">{photo("barista", "Barista pouring latte art", 900)}</div>
-      <div data-reveal="img" style="--d:.12s">{photo("pastries", "Pastries in the display case", 900)}</div>
+      <div data-reveal="img">{photo("barista", "Barista pouring latte art", 900, cls="par")}</div>
+      <div data-reveal="img" style="--d:.12s">{photo("pastries", "Pastries in the display case", 900, cls="par")}</div>
     </div>
     <div class="stack" data-stagger=".1">
       <hr class="rule" data-reveal>

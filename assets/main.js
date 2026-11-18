@@ -154,20 +154,23 @@
     items.forEach(function (el) { io.observe(el); });
   } else { items.forEach(function (el) { el.classList.add('in'); }); }
 
-  /* ---------- Gentle parallax on marked images ---------- */
-  var pars = [].slice.call(document.querySelectorAll('.parallax'));
-  if (pars.length && !reduce) {
-    var ticking = false;
-    function par() {
-      pars.forEach(function (el) {
-        var r = el.parentElement.getBoundingClientRect();
-        var p = Math.max(-1, Math.min(1, (r.top + r.height / 2 - innerHeight / 2) / innerHeight));
-        el.style.transform = 'translateY(' + (p * -40).toFixed(1) + 'px) scale(1.12)';
-      });
-      ticking = false;
-    }
-    window.addEventListener('scroll', function () { if (!ticking) { requestAnimationFrame(par); ticking = true; } }, { passive: true });
-    par();
+  /* ---------- Parallax: images drift slower than the page ---------- */
+  var parEls = [].slice.call(document.querySelectorAll('.ph.par > img, .footer__bg'));
+  function parallax() {
+    var vh = innerHeight;
+    parEls.forEach(function (img) {
+      var box = img.parentElement.getBoundingClientRect();
+      if (box.bottom < -100 || box.top > vh + 100) return;
+      var p = (box.top + box.height / 2 - vh / 2) / (vh / 2 + box.height / 2); // -1..1
+      p = Math.max(-1, Math.min(1, p));
+      var amt = img.classList.contains('footer__bg') ? 0.11 : 0.09;
+      img.style.transform = 'translate3d(0,' + (p * amt * box.height).toFixed(1) + 'px,0)';
+    });
+  }
+  if (parEls.length && !reduce) {
+    if (window.__lenis) window.__lenis.on('scroll', parallax);
+    else window.addEventListener('scroll', function () { requestAnimationFrame(parallax); }, { passive: true });
+    window.addEventListener('resize', parallax); parallax();
   }
 
   /* ---------- Menu tabs: highlight the section in view ---------- */
@@ -218,6 +221,23 @@
       if (!form.checkValidity()) { e.preventDefault(); msg.hidden = false; msg.className = 'form__msg err'; msg.textContent = 'Please fill in your name, a valid email and your message.'; }
     });
   }
+
+  /* ---------- Footer word: split into letters that rise in ---------- */
+  document.querySelectorAll('[data-letters]').forEach(function (el) {
+    var t = el.textContent; el.textContent = '';
+    t.split('').forEach(function (c, i) {
+      var s = document.createElement('span');
+      s.className = 'ch' + (c === ' ' ? ' sp' : '');
+      s.textContent = c === ' ' ? '' : c;
+      s.style.transitionDelay = (i * 0.035).toFixed(3) + 's';
+      el.appendChild(s);
+    });
+    var box = el.parentElement;
+    if ('IntersectionObserver' in window && !reduce) {
+      var o = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { box.classList.add('in'); o.disconnect(); } }); }, { threshold: 0.3 });
+      o.observe(box);
+    } else box.classList.add('in');
+  });
 
   /* ---------- Fit the footer word to the full width ---------- */
   function fit() {

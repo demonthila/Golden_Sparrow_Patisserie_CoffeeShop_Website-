@@ -406,7 +406,7 @@ html, body { overflow-x: clip; }
 .footer__hero::after { content: ""; position: absolute; left: 0; top: 0; width: 65%; height: 1px; background: rgba(246,241,231,.12); z-index: 2; }
 .footer__brand, .footer__wordmark { display: none; }
 .footer__word { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 0 var(--pad); margin: 0; color: var(--cream); font-weight: 500; letter-spacing: -.055em; line-height: .9; white-space: nowrap; user-select: none; overflow: visible; }
-.footer__word span { display: block; font-size: 13vw; transform: none; width: max-content; padding-bottom: .06em; }
+.footer__word > span { display: block; font-size: 13vw; transform: none; width: max-content; padding-bottom: .06em; }
 .footer .footer__bottom { padding: 26px var(--pad) 32px; font-size: 15px; color: var(--muted); }
 .footer__links { display: flex; gap: 24px; }
 .footer__links a { color: var(--cream); }
@@ -463,3 +463,16 @@ html.lenis, html.lenis body { height: auto; }
 .intro__logo { position: fixed; left: 50%; top: 50%; width: min(420px, 72vw); height: auto; transform: translate(-50%, -50%) scale(1); transform-origin: 50% 50%; clip-path: inset(0 100% 0 0); will-change: transform, left, top, clip-path; user-select: none; }
 .intro-done .intro { display: none; }
 .intro-running .nav .logo { visibility: hidden; }
+
+/* ---------- Footer v3: lighter landscape, parallax, letter reveal ---------- */
+.footer__hero { height: clamp(380px, 42vw, 680px); }
+.footer__hero > img.footer__bg { top: -14%; height: 128%; filter: brightness(.82) saturate(.95); will-change: transform; }
+.footer__hero::before { background: linear-gradient(to bottom, var(--ink) 0%, rgba(28,31,22,.6) 18%, rgba(28,31,22,.08) 48%, rgba(28,31,22,0) 70%, rgba(28,31,22,.35) 100%); }
+.footer__word { line-height: 1; bottom: 0; padding-bottom: 0; }
+.footer__word span[data-fit] { padding-bottom: .02em; transform: translateY(.03em); overflow: hidden; }
+.footer__word .ch { display: inline-block; transform: translateY(105%); transition: transform 1.2s var(--ease); will-change: transform; }
+.footer__word .ch.sp { width: .2em; overflow: hidden; }
+.footer__word.in .ch { transform: none; }
+
+/* Parallax images */
+.ph.par > img { top: -12%; height: 124%; will-change: transform; }
