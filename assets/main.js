@@ -4,7 +4,8 @@
   doc.classList.add('js');
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Intro: logo wipes in at centre, then glides into the header (once per visit) ---------- */
+  /* ---------- Intro: logo wipes in at centre, then glides into the header.
+     Plays on every refresh and when arriving from another site; skipped when clicking between our own pages. ---------- */
   var intro = document.querySelector('.intro');
   var played = doc.classList.contains('intro-done');
   function startPage() { doc.classList.add('is-loaded'); }
@@ -12,7 +13,6 @@
     if (intro) intro.remove();
     setTimeout(startPage, 60);
   } else {
-    try { sessionStorage.setItem('gs-intro', '1'); } catch (e) {}
     doc.classList.add('intro-running');
     var logo = intro.querySelector('.intro__logo');
     var EASE = 'cubic-bezier(0.76, 0, 0.24, 1)';
