@@ -259,6 +259,14 @@
   fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit); setTimeout(fit, 800);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 
+  /* ---------- Hero video: loop only the clean part of the clip; respect reduced motion ---------- */
+  document.querySelectorAll('.hero__video').forEach(function (v) {
+    var a = parseFloat(v.dataset.loopStart) || 0, z = parseFloat(v.dataset.loopEnd) || 0;
+    if (reduce) { v.removeAttribute('autoplay'); v.pause(); return; }
+    if (z) v.addEventListener('timeupdate', function () { if (v.currentTime >= z) v.currentTime = a; });
+    var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+  });
+
   /* ---------- Coffee video: load when near, open up as you scroll, pause when away ---------- */
   document.querySelectorAll('.vid').forEach(function (sec) {
     var v = sec.querySelector('video'), frame = sec.querySelector('.vid__frame'), loaded = false;

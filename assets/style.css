@@ -560,3 +560,8 @@ body { background: var(--paper); }
 .mcat .notice { margin-top: 32px; }
 @media (max-width: 860px) { .mcat__grid { grid-template-columns: 1fr; } .mcat__left { position: static; margin-bottom: 24px; } .mhead__grid { grid-template-columns: 1fr; } .mhead__img { width: 220px; } }
 @media (max-width: 480px) { .mi { grid-template-columns: 72px 1fr; gap: 16px; } .mi__img { width: 72px; height: 72px; } }
+
+/* ---------- Hero video (portrait espresso pour) ---------- */
+.hero__img .ph > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.08); transition: transform 2s var(--ease) .1s; }
+.is-loaded .hero__img .ph > video { transform: none; }
+.hero__img .ph { background: #3a2a1f; }

@@ -114,7 +114,7 @@ def head(title, desc, page, extra=""):
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{{var n=(performance.getEntriesByType('navigation')[0]||{{}}).type,r=document.referrer,i=n==='reload'||!r||new URL(r).origin!==location.origin;if(!i)document.documentElement.classList.add('intro-done')}}catch(e){{}}</script>
-<link rel="stylesheet" href="assets/style.css?v=13">
+<link rel="stylesheet" href="assets/style.css?v=14">
 {schema()}{extra}
 </head>
 <body>
@@ -172,7 +172,7 @@ def footer():
   </div>
 </footer>
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/main.js?v=12"></script>
+<script src="assets/main.js?v=13"></script>
 </body>
 </html>
 '''
@@ -238,8 +238,8 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
     <h1 class="sr-only" id="hero-title">{BIZ["name"]}, café and patisserie in Sunbury</h1>
     <div class="hero__grid">
       <p class="display hero__left from-left" aria-hidden="true"><span class="line"><span>A little</span></span><span class="line"><span>sweetness</span></span></p>
-      <div class="hero__img">{photo("hero", "Latte with heart latte art at Golden Sparrow Patisserie", 900, eager=True)}
-        <svg class="steam" viewBox="0 0 120 160" aria-hidden="true"><path d="M40 150 C 20 120, 60 100, 40 70 S 50 20, 40 0"/><path d="M62 150 C 42 118, 82 96, 62 66 S 72 18, 62 0"/><path d="M84 150 C 64 122, 104 102, 84 72 S 94 22, 84 0"/></svg></div>
+      <div class="hero__img"><div class="ph"><video class="hero__video" autoplay muted loop playsinline preload="auto" poster="{src("hero", 900)}" data-loop-start="0.3" data-loop-end="7.0" aria-label="Espresso pouring from the coffee machine at Golden Sparrow Patisserie">
+          <source src="https://videos.pexels.com/video-files/30284611/12981829_720_1680_24fps.mp4" type="video/mp4"></video></div></div>
       <p class="display hero__right from-right" aria-hidden="true"><span class="line"><span>for every</span></span><span class="line"><span class="gold">occasion</span></span></p>
     </div>
     <div class="hero__bottom">
