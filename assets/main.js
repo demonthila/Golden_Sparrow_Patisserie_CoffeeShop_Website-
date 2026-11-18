@@ -259,6 +259,15 @@
   fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit); setTimeout(fit, 800);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 
+  /* ---------- Drag-to-scroll gallery ---------- */
+  document.querySelectorAll('.gal__track').forEach(function (t) {
+    var down = false, sx = 0, sl = 0;
+    t.addEventListener('pointerdown', function (e) { if (e.pointerType !== 'mouse') return; down = true; sx = e.clientX; sl = t.scrollLeft; t.classList.add('drag'); });
+    window.addEventListener('pointerup', function () { down = false; t.classList.remove('drag'); });
+    t.addEventListener('pointermove', function (e) { if (!down) return; t.scrollLeft = sl - (e.clientX - sx); });
+    t.setAttribute('data-lenis-prevent-wheel', '');
+  });
+
   /* ---------- Footer year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

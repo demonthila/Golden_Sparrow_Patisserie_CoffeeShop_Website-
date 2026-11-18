@@ -60,7 +60,11 @@ IMG = {
     "interior": "photo-1555396273-367ea4eb4db5",
     "barista": "photo-1532713107108-dfb5d8d2fc42",
     "shopfront": "photo-1521017432531-fbd92d768814",
-    "footer": "photo-1762686852371-763b689910b2",  # coffee plantation hillside
+    "footer": "photo-1762686852371-763b689910b2",
+    "espresso": "photo-1475296204602-08d15839e95f",
+    "beans": "photo-1447933601403-0c6688de566e",
+    "latteart": "photo-1541167760496-1628856ab772",
+    "croissantcoffee": "photo-1565252556328-92ee4a9a0983",  # coffee plantation hillside
 }
 def src(key, w=1200):
     v = IMG[key]
@@ -110,7 +114,7 @@ def head(title, desc, page, extra=""):
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{{var n=(performance.getEntriesByType('navigation')[0]||{{}}).type,r=document.referrer,i=n==='reload'||!r||new URL(r).origin!==location.origin;if(!i)document.documentElement.classList.add('intro-done')}}catch(e){{}}</script>
-<link rel="stylesheet" href="assets/style.css?v=10">
+<link rel="stylesheet" href="assets/style.css?v=11">
 {schema()}{extra}
 </head>
 <body>
@@ -168,7 +172,7 @@ def footer():
   </div>
 </footer>
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/main.js?v=10"></script>
+<script src="assets/main.js?v=11"></script>
 </body>
 </html>
 '''
@@ -212,6 +216,19 @@ def visit_section():
   </div>
 </section>'''
 
+MARQ = "".join(f'<span>{t}</span><img src="assets/img/logo-bird.webp" alt="">' for t in ['Freshly brewed coffee', 'Golden churros', 'Cakes for every occasion', 'Matcha lattes', 'Raffaello hot chocolate', 'Soft serve sundaes', 'Toasted sandwiches', 'Catering platters'])
+
+def gallery():
+    items = [("latteart", "Latte art, poured by hand"), ("espresso", "Espresso, pulled fresh"), ("croissantcoffee", "Coffee &amp; something sweet"), ("beans", "Locally roasted beans"), ("macarons", "Little treats from the cabinet")]
+    cards = "".join(f'''<figure class="gal__item" data-reveal>{photo(k, cap.replace("&amp;", "and"), 900, cls="par")}<figcaption>{cap}</figcaption></figure>''' for k, cap in items)
+    return f'''<section class="section gal" aria-labelledby="gal-title">
+  <div class="wrap head3">
+    <h2 class="h2" id="gal-title" data-reveal>From our counter</h2>
+    <div class="head3__side"><p class="body" data-reveal>The smell of fresh coffee, the hiss of the milk and a cabinet full of sweets. Drag to look around.</p></div>
+  </div>
+  <div class="gal__track" data-stagger=".08">{cards}</div>
+</section>'''
+
 # ------------------------------------------------------------------ HOME
 home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
             f'{BIZ["name"]} is a local café and patisserie at East Village, Sunbury. Coffee, cakes, golden churros, sandwiches and soft serve. Walk in, no booking needed.',
@@ -221,15 +238,19 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
     <h1 class="sr-only" id="hero-title">{BIZ["name"]}, café and patisserie in Sunbury</h1>
     <div class="hero__grid">
       <p class="display hero__left from-left" aria-hidden="true"><span class="line"><span>A little</span></span><span class="line"><span>sweetness</span></span></p>
-      <div class="hero__img">{photo("hero", "Latte with heart latte art at Golden Sparrow Patisserie", 900, eager=True)}</div>
+      <div class="hero__img">{photo("hero", "Latte with heart latte art at Golden Sparrow Patisserie", 900, eager=True)}
+        <svg class="steam" viewBox="0 0 120 160" aria-hidden="true"><path d="M40 150 C 20 120, 60 100, 40 70 S 50 20, 40 0"/><path d="M62 150 C 42 118, 82 96, 62 66 S 72 18, 62 0"/><path d="M84 150 C 64 122, 104 102, 84 72 S 94 22, 84 0"/></svg></div>
       <p class="display hero__right from-right" aria-hidden="true"><span class="line"><span>for every</span></span><span class="line"><span class="gold">occasion</span></span></p>
     </div>
     <div class="hero__bottom">
-      <p class="lead">Coffee, cakes, golden churros and a warm welcome, at East Village in Sunbury. Pull up a chair or take something sweet to go.</p>
+      <div><p class="eyebrow" style="margin-bottom:12px">Café &amp; Patisserie · East Village, Sunbury</p>
+      <p class="lead">Freshly brewed coffee, cakes, golden churros and a warm welcome. Pull up a chair or take something sweet to go.</p></div>
       <div class="pill" data-open><span class="dot"></span>Open today</div>
     </div>
   </div>
 </section>
+
+<div class="marquee" aria-hidden="true"><div class="marquee__track">{MARQ}{MARQ}</div></div>
 
 <section class="section" style="overflow:hidden" aria-labelledby="intro-title">
   <img class="watermark" src="assets/img/logo-bird.webp" alt="" aria-hidden="true">
@@ -285,13 +306,15 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
       </div>
       <a class="link" href="about.html" data-reveal>Read our story</a>
     </div>
-    <div class="steps" data-stagger=".1">
-      <div class="step step--cream" data-reveal><span class="step__num">01</span><div><h3 class="h3">Golden churros</h3><p class="body">Crisp, golden and dusted with sugar. Our sweet signature.</p></div></div>
-      <div class="step step--cream" data-reveal><span class="step__num">02</span><div><h3 class="h3">Cakes for every occasion</h3><p class="body">Birthdays, celebrations or just because. Ask us about special cakes.</p></div></div>
-      <div class="step step--cream" data-reveal><span class="step__num">03</span><div><h3 class="h3">Catering &amp; platters</h3><p class="body">Customised platters for groups, events and the office.</p></div></div>
+    <div class="cards cards--3" data-stagger=".1">
+      {card("churroscoffee", "Golden churros", "Crisp, golden and dusted with sugar. Our sweet signature, best with a coffee.")}
+      {card("cake", "Cakes for every occasion", "Birthdays, celebrations or just because. Ask us about special occasion cakes.")}
+      {card("pastries", "Catering &amp; platters", "Customised platters for groups, events and the office.")}
     </div>
   </div>
 </section>
+
+{gallery()}
 
 {visit_section()}
 </main>
