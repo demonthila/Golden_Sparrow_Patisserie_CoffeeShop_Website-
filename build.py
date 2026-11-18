@@ -33,6 +33,43 @@ BIRD = ('<path d="M15 39c5-9 15-15 27-14 3-6 9-8 14-6-3 1-5 3-6 6 1 10-7 19-19 2
         '<circle cx="50" cy="22" r="1.6" fill="#fff"/>')
 LOGO = f'<svg viewBox="0 0 64 64" aria-hidden="true">{BIRD}</svg>'
 
+# Stock photos from Unsplash (free licence). Swap for Vani's own photos when they arrive:
+# replace the value with a local path like "assets/img/cappuccino.jpg".
+U = "https://images.unsplash.com/"
+IMG = {
+    "hero": "photo-1512568400610-62da28bc8a13",
+    "cappuccino": "photo-1509042239860-f550ce710b93",
+    "latte": "photo-1485808191679-5f86510681a2",
+    "flatwhite": "photo-1514432324607-a09d9b4aefdd",
+    "matcha": "photo-1515823064-d6e0c04616a7",
+    "icedmatcha": "photo-1717603545758-88cc454db69b",
+    "raffaello": "photo-1762411245614-e0f145ba7183",
+    "icedchoc": "photo-1559329187-79d04171a646",
+    "icedlatte": "photo-1461023058943-07fcbe16d735",
+    "chai": "photo-1561336526-2914f13ceb36",
+    "churros": "photo-1767489386700-cb3dbcbab13d",
+    "churroscoffee": "photo-1702896287488-0a83b9baaab9",
+    "fries": "photo-1630384060421-cb20d0e0649d",
+    "softserve": "photo-1697125138277-962ef4126de4",
+    "sundae": "photo-1695886855588-47117bca2fe6",
+    "sandwich": "photo-1528736235302-52922df5c122",
+    "cakedisplay": "photo-1583338917451-face2751d8d5",
+    "cake": "photo-1571115177098-24ec42ed204d",
+    "macarons": "photo-1558326567-98ae2405596b",
+    "pastries": "photo-1707289424585-66b799af6375",
+    "interior": "photo-1555396273-367ea4eb4db5",
+    "barista": "photo-1532713107108-dfb5d8d2fc42",
+    "shopfront": "photo-1569096651661-820d0de8b4ab",
+}
+def src(key, w=1200):
+    v = IMG[key]
+    return v if "/" in v else f"{U}{v}?auto=format&fit=crop&w={w}&q=80"
+
+def photo(key, alt, w=1200, eager=False, cls=""):
+    load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
+    return (f'<div class="ph {cls}"><img src="{src(key, w)}" srcset="{src(key, w // 2)} {w // 2}w, {src(key, w)} {w}w" '
+            f'sizes="(max-width: 760px) 100vw, 50vw" alt="{alt}" {load}></div>')
+
 def hours_rows():
     return "".join(f'<tr data-day="{d}"><td>{n}</td><td>{h}</td></tr>' for n, d, h in HOURS)
 
@@ -67,7 +104,9 @@ def head(title, desc, page, extra=""):
 <meta property="og:url" content="{BIZ["url"]}/{page}">
 <meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M15 39c5-9 15-15 27-14 3-6 9-8 14-6-3 1-5 3-6 6 1 10-7 19-19 20-6 1-11-1-15-4l-9 6 3-9z' fill='%23b8924a'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/img/favicon.png">
+<meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
 {schema()}{extra}
@@ -75,8 +114,7 @@ def head(title, desc, page, extra=""):
 <body>
 <div class="loader" aria-hidden="true">
   <div>
-    <svg class="loader__mark" viewBox="0 0 64 64"><circle class="fill" cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2"/><g class="bean" transform="translate(4 4) scale(.875)">{BIRD}</g></svg>
-    <div class="loader__word">{BIZ["short"]}</div>
+    <img class="loader__logo" src="assets/img/logo-full.webp" alt="" width="200" height="177">
   </div>
 </div>
 '''
@@ -90,7 +128,7 @@ def nav(active):
     mobile = "".join(a(h, t) for h, t in links)
     return f'''<header class="nav">
   <div class="wrap nav__in">
-    <a class="logo" href="index.html" aria-label="{BIZ["name"]} home"><span class="gold">{LOGO}</span><span>{BIZ["short"]}</span></a>
+    <a class="logo" href="index.html" aria-label="{BIZ["name"]} home"><img src="assets/img/logo-wordmark.webp" alt="{BIZ["name"]}" width="190" height="33"></a>
     <nav class="nav__links" aria-label="Main">{desktop}<a class="btn" href="index.html#visit">Visit us <span class="arrow">→</span></a></nav>
     <button class="nav__toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
   </div>
@@ -103,7 +141,8 @@ def footer():
   <div class="wrap">
     <div class="footer__top" data-stagger=".08">
       <div data-reveal>
-        <p class="h3" style="max-width:16ch">{BIZ["tagline"]}.</p>
+        <img class="footer__logo" src="assets/img/logo-full.webp" alt="{BIZ["name"]}" width="180" height="159" loading="lazy">
+        <p class="small" style="margin-top:14px;color:var(--gold-2)">{BIZ["tagline"]}.</p>
         <div class="pill" data-open><span class="dot"></span>Open today</div>
       </div>
       <div data-reveal>
@@ -121,7 +160,7 @@ def footer():
         <p class="small" style="color:var(--muted);margin-top:8px">Public holiday hours may vary.</p>
       </div>
     </div>
-    <div class="footer__img" data-reveal="img"><div class="ph ph--scene alt"><span class="ph__label">Photo · shopfront</span></div></div>
+    <div class="footer__img" data-reveal="img">{photo("shopfront", "Outdoor café seating", 1800)}</div>
   </div>
   <div class="wrap"><div class="footer__word" aria-hidden="true">golden sparrow</div></div>
   <div class="wrap footer__bottom">
@@ -134,10 +173,9 @@ def footer():
 </html>
 '''
 
-def card(cup, name, note, tags=(), scene=None):
+def card(key, name, note, tags=()):
     t = "".join(f'<span class="tag">{x}</span>' for x in tags)
-    img = (f'<div class="ph" data-cup="{cup}" role="img" aria-label="{name}"></div>' if cup
-           else f'<div class="ph ph--scene {scene or ""}" role="img" aria-label="{name}"><span class="ph__label">Photo · {name}</span></div>')
+    img = photo(key, f"{name} at {BIZ['name']}", 900)
     return f'''<article class="card" data-reveal>
   <div class="card__img">{img}</div>
   <div class="card__row noprice"><h3 class="h3">{name}</h3></div>
@@ -168,7 +206,7 @@ def visit_section():
         <a class="btn btn--light" href="tel:{BIZ["phone"].replace(" ", "")}">Call {BIZ["phone"]}</a>
       </div>
     </div>
-    <div class="map" data-reveal="img"><div class="ph ph--scene light"><span class="ph__label">Google Map · East Village Sunbury</span></div></div>
+    <div class="map" data-reveal="img"><iframe title="Map to Golden Sparrow Patisserie" src="https://www.google.com/maps?q=East+Village+Sunbury+VIC+3429&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
   </div>
 </section>'''
 
@@ -181,7 +219,7 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
     <h1 class="sr-only" id="hero-title">{BIZ["name"]}, café and patisserie in Sunbury</h1>
     <div class="hero__grid">
       <p class="display hero__left" aria-hidden="true"><span class="line"><span>A little</span></span><span class="line"><span>sweetness</span></span></p>
-      <div class="hero__img"><div class="ph" data-cup="cappuccino" role="img" aria-label="Cappuccino at Golden Sparrow"></div></div>
+      <div class="hero__img">{photo("hero", "Latte with heart latte art at Golden Sparrow Patisserie", 900, eager=True)}</div>
       <p class="display hero__right" aria-hidden="true"><span class="line"><span>for every</span></span><span class="line"><span class="gold">occasion</span></span></p>
     </div>
     <div class="hero__bottom">
@@ -192,7 +230,7 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
 </section>
 
 <section class="section" style="overflow:hidden" aria-labelledby="intro-title">
-  <svg class="watermark" viewBox="0 0 64 64" aria-hidden="true">{BIRD}</svg>
+  <img class="watermark" src="assets/img/logo-bird.webp" alt="" aria-hidden="true">
   <div class="wrap split">
     <h2 class="h2" id="intro-title" data-reveal>It's the little things that make life beautiful.</h2>
     <div class="stack" data-stagger=".1">
@@ -231,8 +269,8 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
       </div>
     </div>
     <div class="room">
-      <div data-reveal="img"><div class="ph ph--scene"><span class="ph__label">Photo · café interior</span></div></div>
-      <div data-reveal="img" style="--d:.12s"><div class="ph ph--scene alt"><span class="ph__label">Photo · cake display</span></div></div>
+      <div data-reveal="img">{photo("interior", "Warm café interior with wooden tables", 1600)}</div>
+      <div data-reveal="img" style="--d:.12s">{photo("cakedisplay", "Cakes and tarts in the display cabinet", 900)}</div>
     </div>
   </div>
 </section>
@@ -271,19 +309,30 @@ menu_cats = [
     ]),
     ("cold", "Cold drinks", "Poured over ice, made to order.", [
         ("icedchoc", "Iced Chocolate", "Rich chocolate over ice with cream."),
-        ("iced", "Iced Latte", "Espresso over ice with cold milk."),
-        ("matcha", "Iced Matcha", "Matcha and milk over ice."),
+        ("icedlatte", "Iced Latte", "Espresso over ice with cold milk."),
+        ("icedmatcha", "Iced Matcha", "Matcha and milk over ice."),
+    ]),
+    ("sandwiches", "Sandwiches", "Freshly made every day.", [
+        ("sandwich", "Toasted sandwiches", "Golden toasted sandwiches with your favourite fillings."),
+    ]),
+    ("churros", "Golden churros", "Our sweet signature, crisp and golden.", [
+        ("churros", "Golden churros", "Crisp, golden and dusted with sugar."),
+        ("churroscoffee", "Churros & coffee", "The perfect pairing for a sweet break."),
+    ]),
+    ("fries", "Golden fries", "Crispy and perfectly seasoned.", [
+        ("fries", "Golden fries", "Crispy, golden and perfectly seasoned."),
+    ]),
+    ("softserve", "Soft serve", "A cool and creamy treat.", [
+        ("softserve", "Soft serve", "Classic creamy soft serve in a cone."),
+        ("sundae", "Sundae", "Soft serve with your favourite toppings."),
+    ]),
+    ("sweets", "Cakes & sweets", "From our display cabinet, made for every occasion.", [
+        ("cake", "Cakes", "Beautiful cakes by the slice. Celebration cakes made to order."),
+        ("macarons", "Individual sweets", "Little treats from our display cabinet."),
+        ("cakedisplay", "Tarts & pastries", "A changing selection, baked fresh."),
     ]),
 ]
-food_cats = [
-    ("sandwiches", "Sandwiches", "Freshly made every day.", ["Sandwich", "Toastie", "Wrap"]),
-    ("allday", "All day menu", "Something for every appetite, all day long.", ["All day breakfast", "Light meals", "Kids' options"]),
-    ("churros", "Golden churros", "Our sweet signature, crisp and golden.", ["Classic churros", "Churros with chocolate", "Churros sharing box"]),
-    ("fries", "Golden fries", "Crispy and perfectly seasoned.", ["Golden fries", "Loaded fries"]),
-    ("softserve", "Soft serve", "A cool and creamy treat.", ["Soft serve cone", "Sundae", "Soft serve cup"]),
-    ("sweets", "Cakes & sweets", "From our display cabinet, made for every occasion.", ["Cakes", "Individual sweets", "Celebration cakes (order ahead)"]),
-]
-tabs = "".join(f'<a href="#{k}"{" class=\"active\"" if i == 0 else ""}>{t}</a>' for i, (k, t, *_ ) in enumerate(menu_cats + food_cats))
+tabs = "".join(f'<a href="#{k}"{" class=\"active\"" if i == 0 else ""}>{t}</a>' for i, (k, t, *_ ) in enumerate(menu_cats))
 menu_html = ""
 for key, title, sub, items in menu_cats:
     cards = "".join(card(c, n, d) for c, n, d in items)
@@ -291,14 +340,6 @@ for key, title, sub, items in menu_cats:
   <div class="wrap">
     <div class="head"><div class="stack"><h2 class="h2" id="{key}-h" data-reveal>{title}</h2><p class="body" data-reveal>{sub}</p></div></div>
     <div class="grid3" data-stagger=".08">{cards}</div>
-  </div>
-</section>'''
-for key, title, sub, items in food_cats:
-    rows = "".join(item(n, "") for n in items)
-    menu_html += f'''<section class="menu-cat" id="{key}" aria-labelledby="{key}-h">
-  <div class="wrap">
-    <div class="head"><div class="stack"><h2 class="h2" id="{key}-h" data-reveal>{title}</h2><p class="body" data-reveal>{sub}</p></div></div>
-    <div class="list">{rows}</div>
   </div>
 </section>'''
 
@@ -335,8 +376,8 @@ about = head(f'Our story · {BIZ["name"]}',
 <section class="section" style="padding-top:0" aria-label="How it started">
   <div class="wrap split" style="align-items:start">
     <div class="about-imgs">
-      <div data-reveal="img"><div class="ph" data-cup="cappuccino" role="img" aria-label="Cappuccino"></div></div>
-      <div data-reveal="img" style="--d:.12s"><div class="ph ph--scene"><span class="ph__label">Photo · owners</span></div></div>
+      <div data-reveal="img">{photo("barista", "Barista pouring latte art", 900)}</div>
+      <div data-reveal="img" style="--d:.12s">{photo("pastries", "Pastries in the display case", 900)}</div>
     </div>
     <div class="stack" data-stagger=".1">
       <hr class="rule" data-reveal>

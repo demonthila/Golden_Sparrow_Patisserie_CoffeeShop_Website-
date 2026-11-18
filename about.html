@@ -14,7 +14,9 @@
 <meta property="og:url" content="https://www.goldensparrowpatisserie.com.au/about.html">
 <meta property="og:locale" content="en_AU">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M15 39c5-9 15-15 27-14 3-6 9-8 14-6-3 1-5 3-6 6 1 10-7 19-19 20-6 1-11-1-15-4l-9 6 3-9z' fill='%23b8924a'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/img/favicon.png">
+<meta property="og:image" content="https://www.goldensparrowpatisserie.com.au/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/style.css">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CafeOrCoffeeShop", "name": "Golden Sparrow Patisserie", "url": "https://www.goldensparrowpatisserie.com.au", "slogan": "A little sweetness for every occasion", "telephone": "0452 209 929", "email": "admin@goldensparrowpatisserie.com.au", "servesCuisine": ["Coffee", "Patisserie", "Cakes", "Churros", "Sandwiches"], "address": {"@type": "PostalAddress", "streetAddress": "6B/2 Rhye Street, Building A, East Village", "addressLocality": "Sunbury", "addressRegion": "VIC", "postalCode": "3429", "addressCountry": "AU"}, "openingHours": ["Mo-Sa 07:00-17:00", "Su 07:00-16:00"], "hasMenu": "https://www.goldensparrowpatisserie.com.au/menu.html", "paymentAccepted": "Card, Tap and go, Apple Pay, Google Pay, Cash", "acceptsReservations": false}</script>
@@ -22,13 +24,12 @@
 <body>
 <div class="loader" aria-hidden="true">
   <div>
-    <svg class="loader__mark" viewBox="0 0 64 64"><circle class="fill" cx="32" cy="32" r="30" fill="none" stroke="currentColor" stroke-width="2"/><g class="bean" transform="translate(4 4) scale(.875)"><path d="M15 39c5-9 15-15 27-14 3-6 9-8 14-6-3 1-5 3-6 6 1 10-7 19-19 20-6 1-11-1-15-4l-9 6 3-9z" fill="currentColor"/><circle cx="50" cy="22" r="1.6" fill="#fff"/></g></svg>
-    <div class="loader__word">golden sparrow</div>
+    <img class="loader__logo" src="assets/img/logo-full.webp" alt="" width="200" height="177">
   </div>
 </div>
 <header class="nav">
   <div class="wrap nav__in">
-    <a class="logo" href="index.html" aria-label="Golden Sparrow Patisserie home"><span class="gold"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M15 39c5-9 15-15 27-14 3-6 9-8 14-6-3 1-5 3-6 6 1 10-7 19-19 20-6 1-11-1-15-4l-9 6 3-9z" fill="currentColor"/><circle cx="50" cy="22" r="1.6" fill="#fff"/></svg></span><span>golden sparrow</span></a>
+    <a class="logo" href="index.html" aria-label="Golden Sparrow Patisserie home"><img src="assets/img/logo-wordmark.webp" alt="Golden Sparrow Patisserie" width="190" height="33"></a>
     <nav class="nav__links" aria-label="Main"><a href="menu.html">Menu</a><a href="about.html" aria-current="page">Our story</a><a href="faq.html">FAQ</a><a class="btn" href="index.html#visit">Visit us <span class="arrow">→</span></a></nav>
     <button class="nav__toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
   </div>
@@ -45,8 +46,8 @@
 <section class="section" style="padding-top:0" aria-label="How it started">
   <div class="wrap split" style="align-items:start">
     <div class="about-imgs">
-      <div data-reveal="img"><div class="ph" data-cup="cappuccino" role="img" aria-label="Cappuccino"></div></div>
-      <div data-reveal="img" style="--d:.12s"><div class="ph ph--scene"><span class="ph__label">Photo · owners</span></div></div>
+      <div data-reveal="img"><div class="ph "><img src="https://images.unsplash.com/photo-1532713107108-dfb5d8d2fc42?auto=format&fit=crop&w=900&q=80" srcset="https://images.unsplash.com/photo-1532713107108-dfb5d8d2fc42?auto=format&fit=crop&w=450&q=80 450w, https://images.unsplash.com/photo-1532713107108-dfb5d8d2fc42?auto=format&fit=crop&w=900&q=80 900w" sizes="(max-width: 760px) 100vw, 50vw" alt="Barista pouring latte art" loading="lazy" decoding="async"></div></div>
+      <div data-reveal="img" style="--d:.12s"><div class="ph "><img src="https://images.unsplash.com/photo-1707289424585-66b799af6375?auto=format&fit=crop&w=900&q=80" srcset="https://images.unsplash.com/photo-1707289424585-66b799af6375?auto=format&fit=crop&w=450&q=80 450w, https://images.unsplash.com/photo-1707289424585-66b799af6375?auto=format&fit=crop&w=900&q=80 900w" sizes="(max-width: 760px) 100vw, 50vw" alt="Pastries in the display case" loading="lazy" decoding="async"></div></div>
     </div>
     <div class="stack" data-stagger=".1">
       <hr class="rule" data-reveal>
@@ -89,7 +90,8 @@
   <div class="wrap">
     <div class="footer__top" data-stagger=".08">
       <div data-reveal>
-        <p class="h3" style="max-width:16ch">A little sweetness for every occasion.</p>
+        <img class="footer__logo" src="assets/img/logo-full.webp" alt="Golden Sparrow Patisserie" width="180" height="159" loading="lazy">
+        <p class="small" style="margin-top:14px;color:var(--gold-2)">A little sweetness for every occasion.</p>
         <div class="pill" data-open><span class="dot"></span>Open today</div>
       </div>
       <div data-reveal>
@@ -107,7 +109,7 @@
         <p class="small" style="color:var(--muted);margin-top:8px">Public holiday hours may vary.</p>
       </div>
     </div>
-    <div class="footer__img" data-reveal="img"><div class="ph ph--scene alt"><span class="ph__label">Photo · shopfront</span></div></div>
+    <div class="footer__img" data-reveal="img"><div class="ph "><img src="https://images.unsplash.com/photo-1569096651661-820d0de8b4ab?auto=format&fit=crop&w=1800&q=80" srcset="https://images.unsplash.com/photo-1569096651661-820d0de8b4ab?auto=format&fit=crop&w=900&q=80 900w, https://images.unsplash.com/photo-1569096651661-820d0de8b4ab?auto=format&fit=crop&w=1800&q=80 1800w" sizes="(max-width: 760px) 100vw, 50vw" alt="Outdoor café seating" loading="lazy" decoding="async"></div></div>
   </div>
   <div class="wrap"><div class="footer__word" aria-hidden="true">golden sparrow</div></div>
   <div class="wrap footer__bottom">
