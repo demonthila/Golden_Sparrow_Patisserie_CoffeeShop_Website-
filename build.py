@@ -108,7 +108,7 @@ def head(title, desc, page, extra=""):
 <link rel="apple-touch-icon" href="assets/img/favicon.png">
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=3">
 {schema()}{extra}
 </head>
 <body>
@@ -168,7 +168,7 @@ def footer():
     <span>Website by <a href="https://www.novalinkinnovations.com">NovaLink Innovations</a></span>
   </div>
 </footer>
-<script src="assets/main.js"></script>
+<script src="assets/main.js?v=3"></script>
 </body>
 </html>
 '''
