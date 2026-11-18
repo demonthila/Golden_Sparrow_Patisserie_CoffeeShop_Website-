@@ -519,3 +519,5 @@ body { background: var(--paper); }
 .gal__track img { pointer-events: none; }
 @media (max-width: 760px) { .cards--3 { grid-template-columns: 1fr; } .gal__item:nth-child(even) { margin-top: 0; } .marquee { padding: 16px 0; } }
 @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } .steam { display: none; } }
+.gal__track { padding-left: max(var(--pad), calc((100vw - var(--max)) / 2 + var(--pad))); padding-right: var(--pad); scroll-padding-left: max(var(--pad), calc((100vw - var(--max)) / 2 + var(--pad))); }
+.steam path { stroke: rgba(255,255,255,.7); }
