@@ -109,7 +109,7 @@ def head(title, desc, page, extra=""):
 <link rel="apple-touch-icon" href="assets/img/favicon.png">
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=6">
+<link rel="stylesheet" href="assets/style.css?v=7">
 {schema()}{extra}
 </head>
 <body>
@@ -165,7 +165,8 @@ def footer():
     <span class="footer__links"><a href="contact.html">Contact</a><a href="https://www.novalinkinnovations.com">Website by NovaLink</a></span>
   </div>
 </footer>
-<script src="assets/main.js?v=6"></script>
+<script src="assets/js/lenis.min.js"></script>
+<script src="assets/main.js?v=7"></script>
 </body>
 </html>
 '''
@@ -189,21 +190,23 @@ def item(name, note, tags=()):
 </div>'''
 
 def visit_section():
-    return f'''<section class="section section--cream" id="visit" aria-labelledby="visit-title">
-  <div class="wrap visit">
-    <div class="stack" data-stagger=".08">
-      <p class="eyebrow" data-reveal>Visit us</p>
-      <h2 class="h2" id="visit-title" data-reveal>Just outside Woolies at East Village</h2>
-      <p class="body" data-reveal>Find us at {ADDR}. No booking needed, just walk in. Free parking right outside.</p>
-      <div class="pill" data-open data-reveal><span class="dot"></span>Open today</div>
-      <table class="hours" data-reveal><tbody>{hours_rows()}</tbody></table>
-      <p class="small" style="color:var(--muted-2)" data-reveal>Public holiday hours may vary.</p>
-      <div class="visit__btns" data-reveal>
-        <a class="btn" href="{BIZ["maps"]}">Get directions <span class="arrow">→</span></a>
-        <a class="btn btn--light" href="tel:{BIZ["phone"].replace(" ", "")}">Call {BIZ["phone"]}</a>
+    return f'''<section class="section visit-sec" id="visit" aria-labelledby="visit-title">
+  <img class="visit__mark" src="assets/img/logo-bird.webp" alt="" aria-hidden="true">
+  <div class="wrap visit3">
+    <div class="visit3__info">
+      <h2 class="h2" id="visit-title" data-reveal>Find us at East Village</h2>
+      <p class="visit3__addr" data-reveal><a href="{BIZ["maps"]}">{BIZ["street"]}, {BIZ["suburb"]}</a></p>
+      <p class="visit3__text" data-reveal>Just outside Woolies at East Village Sunbury, with free parking right outside. No booking needed.</p>
+      <div class="visit3__btns" data-reveal>
+        <a class="btn btn--lg" href="{BIZ["maps"]}">Get directions</a>
+        <a class="link link--lg" href="contact.html">Contact and FAQ</a>
       </div>
     </div>
-    <div class="map" data-reveal="img"><iframe title="Map to Golden Sparrow Patisserie" src="https://www.google.com/maps?q=East+Village+Sunbury+VIC+3429&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+    <div class="visit3__hours" data-reveal>
+      <p class="visit3__label">Opening hours</p>
+      <table class="hours hours--lg"><tbody>{hours_rows()}</tbody></table>
+    </div>
+    <div class="visit3__img" data-reveal="img">{photo("cakedisplay", "Cakes and sweets in the display cabinet at Golden Sparrow", 900)}</div>
   </div>
 </section>'''
 
@@ -239,13 +242,12 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
 
 <section class="section section--cream" aria-labelledby="start-title">
   <div class="wrap">
-    <div class="head">
-      <div class="stack" data-stagger=".08">
-        <p class="eyebrow" data-reveal>Sip something special</p>
-        <h2 class="h2" id="start-title" data-reveal>Our signature drinks</h2>
-        <p class="body" data-reveal>Four favourites our regulars come back for. Indulge in every sip.</p>
+    <div class="head3">
+      <h2 class="h2" id="start-title" data-reveal>Where to start</h2>
+      <div class="head3__side" data-stagger=".08">
+        <p class="body" data-reveal>Four signature drinks we would pour for you on a first visit. Sip something special and indulge in every sip.</p>
+        <p data-reveal><a class="link" href="menu.html">See the full menu</a></p>
       </div>
-      <a class="link" href="menu.html" data-reveal>See the full menu</a>
     </div>
     <div class="cards" data-stagger=".1">
       {card("matcha", "Matcha Latte", "Smooth, creamy and beautifully green. A calm little moment in a cup.")}

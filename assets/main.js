@@ -14,6 +14,13 @@
   // safety net if load is slow
   setTimeout(function () { doc.classList.add('is-loaded'); }, 3500);
 
+  /* ---------- Smooth scrolling (Lenis), like the reference ---------- */
+  if (window.Lenis && !reduce) {
+    var lenis = new Lenis({ lerp: 0.1, smoothWheel: true, anchors: true });
+    (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(0);
+    window.__lenis = lenis;
+  }
+
   /* ---------- Coffee "photo" placeholders (SVG, replaced by real photos later) ---------- */
   var uid = 0;
   var drinks = {
