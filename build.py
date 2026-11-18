@@ -109,27 +109,28 @@ def head(title, desc, page, extra=""):
 <link rel="apple-touch-icon" href="assets/img/favicon.png">
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=4">
+<link rel="stylesheet" href="assets/style.css?v=5">
 {schema()}{extra}
 </head>
 <body>
 '''
 
 def nav(active):
-    links = [("index.html", "Home"), ("menu.html", "Menu"), ("about.html", "Our story"), ("faq.html", "FAQ")]
+    links = [("menu.html", "Menu"), ("about.html", "Our story"), ("faq.html", "FAQ"), ("contact.html", "Contact")]
     def a(h, t):
         cur = ' aria-current="page"' if h == active else ""
         return f'<a href="{h}"{cur}>{t}</a>'
-    desktop = "".join(a(h, t) for h, t in links[1:])
-    mobile = "".join(a(h, t) for h, t in links)
+    desktop = "".join(a(h, t) for h, t in links)
+    mobile = a("index.html", "Home") + desktop
     return f'''<header class="nav">
   <div class="wrap nav__in">
+    <nav class="nav__links" aria-label="Main">{desktop}</nav>
     <a class="logo" href="index.html" aria-label="{BIZ["name"]} home"><img src="assets/img/logo-wordmark.webp" alt="{BIZ["name"]}" width="190" height="33"></a>
-    <nav class="nav__links" aria-label="Main">{desktop}<a class="btn" href="index.html#visit">Visit us <span class="arrow">→</span></a></nav>
+    <div class="nav__cta"><a class="btn" href="contact.html">Visit us</a></div>
     <button class="nav__toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
   </div>
 </header>
-<nav class="overlay" aria-label="Mobile">{mobile}<a class="btn" href="index.html#visit">Visit us <span class="arrow">→</span></a></nav>
+<nav class="overlay" aria-label="Mobile">{mobile}<a class="btn" href="contact.html">Visit us <span class="arrow">→</span></a></nav>
 '''
 
 def footer():
@@ -147,7 +148,7 @@ def footer():
     </div>
     <div class="footer__col" data-reveal>
       <h4>Explore</h4>
-      <ul><li><a href="menu.html">Menu</a></li><li><a href="about.html">Our story</a></li><li><a href="faq.html">FAQ</a></li><li><a href="index.html#visit">Visit</a></li><li><a href="{BIZ["maps"]}">Get directions</a></li></ul>
+      <ul><li><a href="menu.html">Menu</a></li><li><a href="about.html">Our story</a></li><li><a href="faq.html">FAQ</a></li><li><a href="contact.html">Contact</a></li><li><a href="{BIZ["maps"]}">Get directions</a></li></ul>
     </div>
     <div class="footer__col footer__hours" data-reveal>
       <h4>Opening hours</h4>
@@ -166,7 +167,7 @@ def footer():
     </div>
   </div>
 </footer>
-<script src="assets/main.js?v=4"></script>
+<script src="assets/main.js?v=5"></script>
 </body>
 </html>
 '''
@@ -451,7 +452,53 @@ faq = head(f'FAQ · {BIZ["name"]}',
 </main>
 ''' + footer()
 
-for name, html in [("index.html", home), ("menu.html", menu), ("about.html", about), ("faq.html", faq)]:
+
+# ------------------------------------------------------------------ CONTACT
+contact = head(f'Contact · {BIZ["name"]}, Sunbury',
+               f'Contact {BIZ["name"]} at East Village, Sunbury. Call {BIZ["phone"]}, email us, or send an enquiry about catering, platters and special occasion cakes.',
+               "contact.html") + nav("contact.html") + f'''<main>
+<section class="page-head">
+  <div class="wrap">
+    <h1 class="h1" data-reveal>Get in touch</h1>
+    <p class="lead" data-reveal>Questions, catering platters or a cake for a special occasion? Send us a message and we'll get back to you.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap contact">
+    <form class="contact__form" action="contact.php" method="post" data-reveal novalidate>
+      <div class="form__msg" role="status" aria-live="polite" hidden></div>
+      <div class="field"><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" required></div>
+      <div class="field-row">
+        <div class="field"><label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="phone">Phone <span>(optional)</span></label><input id="phone" name="phone" type="tel" autocomplete="tel"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label for="topic">What's it about?</label>
+          <select id="topic" name="topic"><option>General enquiry</option><option>Catering &amp; platters</option><option>Special occasion cake</option><option>Feedback</option></select></div>
+        <div class="field"><label for="date">Date needed <span>(optional)</span></label><input id="date" name="date" type="date"></div>
+      </div>
+      <div class="field"><label for="message">Message</label><textarea id="message" name="message" rows="6" required></textarea></div>
+      <div class="hp" aria-hidden="true"><label for="website">Website</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+      <button class="btn btn--gold" type="submit">Send message <span class="arrow">→</span></button>
+    </form>
+
+    <aside class="contact__info" data-stagger=".08">
+      <div data-reveal><h2 class="eyebrow">Visit</h2><p>{ADDR}</p><p class="small" style="color:var(--muted-2)">Just outside Woolies. Free parking.</p></div>
+      <div data-reveal><h2 class="eyebrow">Call</h2><p><a href="tel:{BIZ["phone"].replace(" ", "")}">{BIZ["phone"]}</a></p></div>
+      <div data-reveal><h2 class="eyebrow">Email</h2><p><a href="mailto:{BIZ["email"]}">{BIZ["email"]}</a></p></div>
+      <div data-reveal><h2 class="eyebrow">Opening hours</h2><table class="hours"><tbody>{hours_rows()}</tbody></table><p class="small" style="color:var(--muted-2);margin-top:10px">Public holiday hours may vary.</p></div>
+    </aside>
+  </div>
+</section>
+
+<section class="wrap" style="padding-bottom:clamp(72px,10vw,140px)">
+  <div class="map map--wide" data-reveal="img"><iframe title="Map to {BIZ["name"]}" src="https://www.google.com/maps?q=East+Village+Sunbury+VIC+3429&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+</section>
+</main>
+''' + footer()
+
+for name, html in [("index.html", home), ("menu.html", menu), ("about.html", about), ("faq.html", faq), ("contact.html", contact)]:
     with open(os.path.join(OUT, name), "w", encoding="utf-8") as f:
         f.write(html)
 print("built")
