@@ -114,7 +114,7 @@ def head(title, desc, page, extra=""):
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{{var n=(performance.getEntriesByType('navigation')[0]||{{}}).type,r=document.referrer,i=n==='reload'||!r||new URL(r).origin!==location.origin;if(!i)document.documentElement.classList.add('intro-done')}}catch(e){{}}</script>
-<link rel="stylesheet" href="assets/style.css?v=11">
+<link rel="stylesheet" href="assets/style.css?v=12">
 {schema()}{extra}
 </head>
 <body>
@@ -172,7 +172,7 @@ def footer():
   </div>
 </footer>
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/main.js?v=11"></script>
+<script src="assets/main.js?v=12"></script>
 </body>
 </html>
 '''
@@ -277,6 +277,19 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
       {card("raffaello", "Raffaello Hot Chocolate", "Creamy white chocolate, coconut and almond. Pure indulgence.")}
       {card("icedchoc", "Iced Chocolate", "Rich chocolate over ice, finished with cream. A sweet treat any time of day.")}
       {card("cappuccino", "Cappuccino", "Velvety foam and a dusting of chocolate, made just the way you like it.")}
+    </div>
+  </div>
+</section>
+
+
+<section class="vid" aria-label="Espresso being made">
+  <div class="vid__frame">
+    <video class="vid__video" muted loop playsinline preload="metadata" poster="{src("espresso", 1600)}"
+      data-src-lg="https://videos.pexels.com/video-files/7457398/7457398-hd_1920_1080_30fps.mp4"
+      data-src-sm="https://videos.pexels.com/video-files/7457398/7457398-hd_1280_720_30fps.mp4"></video>
+    <div class="vid__overlay">
+      <p class="eyebrow">Pulled fresh, every morning</p>
+      <h2 class="h2">Every cup, made with care</h2>
     </div>
   </div>
 </section>

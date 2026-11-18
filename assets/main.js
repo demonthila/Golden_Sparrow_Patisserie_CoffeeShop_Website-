@@ -259,6 +259,30 @@
   fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit); setTimeout(fit, 800);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 
+  /* ---------- Coffee video: load when near, open up as you scroll, pause when away ---------- */
+  document.querySelectorAll('.vid').forEach(function (sec) {
+    var v = sec.querySelector('video'), frame = sec.querySelector('.vid__frame'), loaded = false;
+    function load() { if (loaded) return; loaded = true; v.src = innerWidth > 1000 ? v.dataset.srcLg : v.dataset.srcSm; v.load(); }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { load(); if (!reduce) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } }
+          else v.pause();
+        });
+      }, { rootMargin: '300px 0px' }).observe(sec);
+    } else { load(); }
+    function open() {
+      var r = sec.getBoundingClientRect(), vh = innerHeight;
+      var p = Math.max(0, Math.min(1, (vh - r.top) / (vh * 0.9)));
+      if (reduce) p = 1;
+      frame.style.setProperty('--vi-y', (6 * (1 - p)).toFixed(2) + '%');
+      frame.style.setProperty('--vi-x', (8 * (1 - p)).toFixed(2) + '%');
+      frame.style.setProperty('--vi-s', (1 + 0.12 * (1 - p)).toFixed(3));
+    }
+    if (window.__lenis) window.__lenis.on('scroll', open); else window.addEventListener('scroll', function () { requestAnimationFrame(open); }, { passive: true });
+    window.addEventListener('resize', open); open();
+  });
+
   /* ---------- Drag-to-scroll gallery ---------- */
   document.querySelectorAll('.gal__track').forEach(function (t) {
     var down = false, sx = 0, sl = 0;

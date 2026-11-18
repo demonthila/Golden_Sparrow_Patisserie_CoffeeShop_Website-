@@ -521,3 +521,12 @@ body { background: var(--paper); }
 @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; } .steam { display: none; } }
 .gal__track { padding-left: max(var(--pad), calc((100vw - var(--max)) / 2 + var(--pad))); padding-right: var(--pad); scroll-padding-left: max(var(--pad), calc((100vw - var(--max)) / 2 + var(--pad))); }
 .steam path { stroke: rgba(255,255,255,.7); }
+
+/* ---------- Coffee video band (opens to full width on scroll) ---------- */
+.vid { padding: clamp(24px, 4vw, 48px) 0; background: var(--paper); }
+.vid__frame { position: relative; height: min(88vh, 860px); overflow: hidden; clip-path: inset(var(--vi-y, 6%) var(--vi-x, 8%) round 28px); will-change: clip-path; }
+.vid__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(var(--vi-s, 1.12)); }
+.vid__overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(28px, 5vw, 72px) clamp(24px, 9vw, 140px); color: var(--paper); background: linear-gradient(to top, rgba(33,25,19,.65), rgba(33,25,19,0) 55%); }
+.vid__overlay .eyebrow { color: var(--gold-2); margin-bottom: 14px; }
+.vid__overlay .h2 { font-size: clamp(40px, 6vw, 92px); line-height: .95; letter-spacing: -.045em; max-width: 10em; }
+@media (max-width: 760px) { .vid__frame { height: 70vh; } }
