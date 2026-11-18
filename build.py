@@ -114,7 +114,7 @@ def head(title, desc, page, extra=""):
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{{var n=(performance.getEntriesByType('navigation')[0]||{{}}).type,r=document.referrer,i=n==='reload'||!r||new URL(r).origin!==location.origin;if(!i)document.documentElement.classList.add('intro-done')}}catch(e){{}}</script>
-<link rel="stylesheet" href="assets/style.css?v=12">
+<link rel="stylesheet" href="assets/style.css?v=13">
 {schema()}{extra}
 </head>
 <body>
@@ -336,65 +336,87 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
 # ------------------------------------------------------------------ MENU
 # NOTE: sample items until Vani's menu PDF arrives — replace with the real menu. No prices (client request).
 menu_cats = [
-    ("hot", "Hot drinks", "Made fresh, just the way you like it.", [
-        ("cappuccino", "Cappuccino", "Velvety foam with a dusting of chocolate."),
-        ("latte", "Latte", "Smooth espresso with creamy steamed milk."),
-        ("flatwhite", "Flat White", "Silky milk over a double shot."),
-        ("matcha", "Matcha Latte", "Creamy, calming and beautifully green."),
-        ("raffaello", "Raffaello Hot Chocolate", "White chocolate, coconut and almond."),
-        ("chai", "Chai Latte", "Warm spices and steamed milk."),
+    ("hot", "Hot drinks", "Made fresh to order, just the way you like it. Ask us about milk options.", [
+        ("cappuccino", "Cappuccino", "Velvety foam with a dusting of chocolate.", ["Hot", "Coffee"]),
+        ("latte", "Latte", "Smooth espresso with creamy steamed milk.", ["Hot", "Coffee"]),
+        ("flatwhite", "Flat White", "Silky milk over a double shot.", ["Hot", "Coffee"]),
+        ("matcha", "Matcha Latte", "Creamy, calming and beautifully green.", ["Hot", "Signature"]),
+        ("raffaello", "Raffaello Hot Chocolate", "White chocolate, coconut and almond. Pure indulgence.", ["Hot", "Signature"]),
+        ("chai", "Chai Latte", "Warm spices and steamed milk.", ["Hot"]),
     ]),
-    ("cold", "Cold drinks", "Poured over ice, made to order.", [
-        ("icedchoc", "Iced Chocolate", "Rich chocolate over ice with cream."),
-        ("icedlatte", "Iced Latte", "Espresso over ice with cold milk."),
-        ("icedmatcha", "Iced Matcha", "Matcha and milk over ice."),
+    ("cold", "Cold drinks", "Poured over ice, made to order. Perfect for warm Sunbury afternoons.", [
+        ("icedchoc", "Iced Chocolate", "Rich chocolate over ice, finished with cream.", ["Iced", "Signature"]),
+        ("icedlatte", "Iced Latte", "Espresso over ice with cold milk.", ["Iced", "Coffee"]),
+        ("icedmatcha", "Iced Matcha", "Matcha and milk over ice.", ["Iced"]),
     ]),
-    ("sandwiches", "Sandwiches", "Freshly made every day.", [
-        ("sandwich", "Toasted sandwiches", "Golden toasted sandwiches with your favourite fillings."),
+    ("food", "Sandwiches &amp; all day", "Freshly made every day, for breakfast, lunch or anything in between.", [
+        ("sandwich", "Toasted sandwiches", "Golden toasted sandwiches with your favourite fillings.", ["Made fresh"]),
+        ("fries", "Golden fries", "Crispy, golden and perfectly seasoned.", ["Hot", "Great to share"]),
     ]),
-    ("churros", "Golden churros", "Our sweet signature, crisp and golden.", [
-        ("churroscoffee", "Golden churros", "Crisp, golden and dusted with sugar. Perfect with a coffee."),
+    ("sweet", "Churros &amp; soft serve", "Our sweet signatures. Crisp, golden and made to be shared.", [
+        ("churroscoffee", "Golden churros", "Crisp, golden and dusted with sugar. Perfect with a coffee.", ["Signature", "Great to share"]),
+        ("softserve", "Soft serve", "Classic creamy soft serve in a cone.", ["Sweet treat"]),
+        ("sundae", "Sundae", "Soft serve with your favourite toppings.", ["Sweet treat"]),
     ]),
-    ("fries", "Golden fries", "Crispy and perfectly seasoned.", [
-        ("fries", "Golden fries", "Crispy, golden and perfectly seasoned."),
-    ]),
-    ("softserve", "Soft serve", "A cool and creamy treat.", [
-        ("softserve", "Soft serve", "Classic creamy soft serve in a cone."),
-        ("sundae", "Sundae", "Soft serve with your favourite toppings."),
-    ]),
-    ("sweets", "Cakes & sweets", "From our display cabinet, made for every occasion.", [
-        ("cake", "Cakes", "Beautiful cakes by the slice. Celebration cakes made to order."),
-        ("macarons", "Individual sweets", "Little treats from our display cabinet."),
-        ("cakedisplay", "Tarts & pastries", "A changing selection, baked fresh."),
+    ("cakes", "Cakes &amp; sweets", "From our display cabinet, made for every occasion. When they're gone, they're gone.", [
+        ("cake", "Cakes", "Beautiful cakes by the slice. Celebration cakes made to order.", ["Order ahead"]),
+        ("macarons", "Individual sweets", "Little treats from the cabinet, changing every day.", ["Sweet treat"]),
+        ("cakedisplay", "Tarts &amp; pastries", "A changing selection, baked fresh.", ["Made fresh"]),
     ]),
 ]
-tabs = "".join(f'<a href="#{k}"{" class=\"active\"" if i == 0 else ""}>{t}</a>' for i, (k, t, *_ ) in enumerate(menu_cats))
+good_to_know = [("Takeaway", "Everything on the menu"), ("Dietary requirements", "Just ask, we have options"),
+                ("Celebration cakes", "Order ahead"), ("Catering platters", "Customised for groups"),
+                ("Bookings", "Not needed, walk in")]
+
+def mitem(key, name, note, tags):
+    t = "".join(f'<span class="tag">{x}</span>' for x in tags)
+    return f'''<article class="mi" data-reveal>
+  <div class="mi__img">{photo(key, f"{name} at {BIZ['name']}", 300)}</div>
+  <div class="mi__copy">
+    <h3 class="mi__name">{name}</h3>
+    <p class="mi__note">{note}</p>
+    <div class="mi__tags">{t}</div>
+  </div>
+</article>'''
+
 menu_html = ""
 for key, title, sub, items in menu_cats:
-    cards = "".join(card(c, n, d) for c, n, d in items)
-    menu_html += f'''<section class="menu-cat" id="{key}" aria-labelledby="{key}-h">
-  <div class="wrap">
-    <div class="head"><div class="stack"><h2 class="h2" id="{key}-h" data-reveal>{title}</h2><p class="body" data-reveal>{sub}</p></div></div>
-    <div class="grid3" data-stagger=".08">{cards}</div>
+    menu_html += f'''<section class="mcat" id="{key}" aria-labelledby="{key}-h">
+  <div class="wrap mcat__grid">
+    <div class="mcat__left">
+      <h2 class="mcat__title" id="{key}-h" data-reveal>{title}</h2>
+      <p class="mcat__text" data-reveal>{sub}</p>
+    </div>
+    <div class="mcat__list">{"".join(mitem(*i) for i in items)}</div>
+  </div>
+</section>'''
+gtk_rows = "".join(f'<div class="kv" data-reveal><span>{k}</span><span>{v}</span></div>' for k, v in good_to_know)
+menu_html += f'''<section class="mcat" id="good-to-know" aria-labelledby="gtk-h">
+  <div class="wrap mcat__grid">
+    <div class="mcat__left">
+      <h2 class="mcat__title" id="gtk-h" data-reveal>Good to know</h2>
+      <p class="mcat__text" data-reveal>A few things our regulars ask about.</p>
+    </div>
+    <div class="mcat__list">
+      <div class="kvlist">{gtk_rows}</div>
+      <p class="notice" data-reveal>Allergy notice: please let our team know about any allergies before ordering. Our kitchen handles common allergens.</p>
+    </div>
   </div>
 </section>'''
 
 menu = head(f'Menu · {BIZ["name"]}, Sunbury',
-            f'The {BIZ["name"]} menu: coffee, matcha, Raffaello hot chocolate, iced drinks, sandwiches, all day menu, golden churros, golden fries, soft serve and cakes.',
+            f'The {BIZ["name"]} menu: coffee, matcha, Raffaello hot chocolate, iced drinks, toasted sandwiches, golden fries, golden churros, soft serve, cakes and sweets.',
             "menu.html") + nav("menu.html") + f'''<main>
-<section class="page-head">
-  <div class="wrap">
-    <h1 class="h1" data-reveal>Our menu</h1>
-    <div class="stack" data-stagger=".08">
-      <p class="body" data-reveal>Coffee, sweet treats and something for every appetite. We cater for a range of dietary requirements, so just ask our team.</p>
+<section class="mhead">
+  <div class="wrap mhead__grid">
+    <div>
+      <h1 class="mhead__title" data-reveal>The menu</h1>
+      <p class="mhead__intro" data-reveal>Coffee, sweet treats and something for every appetite. We cater for a range of dietary requirements, so just ask our team, we're happy to help.</p>
     </div>
+    <div class="mhead__img" data-reveal="img">{photo("cappuccino", "Cappuccino at Golden Sparrow Patisserie", 700)}</div>
   </div>
 </section>
-<div class="tabs"><div class="wrap tabs__in">{tabs}</div></div>
 {menu_html}
-<section class="wrap" style="padding-bottom:clamp(56px,7vw,96px)">
-  <p class="notice" data-reveal>Allergy notice: please let our team know about any allergies before ordering.</p>
-</section>
 </main>
 ''' + footer()
 
