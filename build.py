@@ -59,7 +59,7 @@ IMG = {
     "pastries": "photo-1707289424585-66b799af6375",
     "interior": "photo-1555396273-367ea4eb4db5",
     "barista": "photo-1532713107108-dfb5d8d2fc42",
-    "shopfront": "photo-1569096651661-820d0de8b4ab",
+    "shopfront": "photo-1521017432531-fbd92d768814",
 }
 def src(key, w=1200):
     v = IMG[key]
@@ -160,7 +160,7 @@ def footer():
         <p class="small" style="color:var(--muted);margin-top:8px">Public holiday hours may vary.</p>
       </div>
     </div>
-    <div class="footer__img" data-reveal="img">{photo("shopfront", "Outdoor café seating", 1800)}</div>
+    <div class="footer__img" data-reveal="img">{photo("shopfront", "Inside a warm, busy café", 1800)}</div>
   </div>
   <div class="wrap"><div class="footer__word" aria-hidden="true">golden sparrow</div></div>
   <div class="wrap footer__bottom">
