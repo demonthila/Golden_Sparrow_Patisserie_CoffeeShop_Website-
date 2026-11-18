@@ -18,15 +18,10 @@
 <link rel="apple-touch-icon" href="assets/img/favicon.png">
 <meta property="og:image" content="https://www.goldensparrowpatisserie.com.au/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/style.css?v=4">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CafeOrCoffeeShop", "name": "Golden Sparrow Patisserie", "url": "https://www.goldensparrowpatisserie.com.au", "slogan": "A little sweetness for every occasion", "telephone": "0452 209 929", "email": "admin@goldensparrowpatisserie.com.au", "servesCuisine": ["Coffee", "Patisserie", "Cakes", "Churros", "Sandwiches"], "address": {"@type": "PostalAddress", "streetAddress": "6B/2 Rhye Street, Building A, East Village", "addressLocality": "Sunbury", "addressRegion": "VIC", "postalCode": "3429", "addressCountry": "AU"}, "openingHours": ["Mo-Sa 07:00-17:00", "Su 07:00-16:00"], "hasMenu": "https://www.goldensparrowpatisserie.com.au/menu.html", "paymentAccepted": "Card, Tap and go, Apple Pay, Google Pay, Cash", "acceptsReservations": false}</script>
 </head>
 <body>
-<div class="loader" aria-hidden="true">
-  <div>
-    <img class="loader__logo" src="assets/img/logo-full.webp" alt="" width="200" height="177">
-  </div>
-</div>
 <header class="nav">
   <div class="wrap nav__in">
     <a class="logo" href="index.html" aria-label="Golden Sparrow Patisserie home"><img src="assets/img/logo-wordmark.webp" alt="Golden Sparrow Patisserie" width="190" height="33"></a>
@@ -40,9 +35,9 @@
   <div class="wrap">
     <h1 class="sr-only" id="hero-title">Golden Sparrow Patisserie, café and patisserie in Sunbury</h1>
     <div class="hero__grid">
-      <p class="display hero__left" aria-hidden="true"><span class="line"><span>A little</span></span><span class="line"><span>sweetness</span></span></p>
+      <p class="display hero__left from-left" aria-hidden="true"><span class="line"><span>A little</span></span><span class="line"><span>sweetness</span></span></p>
       <div class="hero__img"><div class="ph "><img src="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&w=900&q=80" srcset="https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&w=450&q=80 450w, https://images.unsplash.com/photo-1512568400610-62da28bc8a13?auto=format&fit=crop&w=900&q=80 900w" sizes="(max-width: 760px) 100vw, 50vw" alt="Latte with heart latte art at Golden Sparrow Patisserie" fetchpriority="high"></div></div>
-      <p class="display hero__right" aria-hidden="true"><span class="line"><span>for every</span></span><span class="line"><span class="gold">occasion</span></span></p>
+      <p class="display hero__right from-right" aria-hidden="true"><span class="line"><span>for every</span></span><span class="line"><span class="gold">occasion</span></span></p>
     </div>
     <div class="hero__bottom">
       <p class="lead">Coffee, cakes, golden churros and a warm welcome, at East Village in Sunbury. Pull up a chair or take something sweet to go.</p>
@@ -153,36 +148,38 @@
 </section>
 </main>
 <footer class="footer">
-  <div class="wrap">
-    <div class="footer__top" data-stagger=".08">
-      <div data-reveal>
-        <img class="footer__logo" src="assets/img/logo-full.webp" alt="Golden Sparrow Patisserie" width="180" height="159" loading="lazy">
-        <p class="small" style="margin-top:14px;color:var(--gold-2)">A little sweetness for every occasion.</p>
-        <div class="pill" data-open><span class="dot"></span>Open today</div>
-      </div>
-      <div data-reveal>
-        <h4>Visit</h4>
-        <p>6B/2 Rhye Street, Building A<br>East Village, Sunbury VIC 3429</p>
-        <p style="margin-top:12px"><a href="tel:0452209929">0452 209 929</a><br><a href="mailto:admin@goldensparrowpatisserie.com.au">admin@goldensparrowpatisserie.com.au</a></p>
-      </div>
-      <div data-reveal>
-        <h4>Explore</h4>
-        <ul><li><a href="menu.html">Menu</a></li><li><a href="about.html">Our story</a></li><li><a href="faq.html">FAQ</a></li><li><a href="https://www.google.com/maps/search/?api=1&query=Golden+Sparrow+Patisserie+East+Village+Sunbury">Get directions</a></li></ul>
-      </div>
-      <div data-reveal>
-        <h4>Hours</h4>
-        <table class="hours"><tbody><tr data-day="1"><td>Monday</td><td>7 am – 5 pm</td></tr><tr data-day="2"><td>Tuesday</td><td>7 am – 5 pm</td></tr><tr data-day="3"><td>Wednesday</td><td>7 am – 5 pm</td></tr><tr data-day="4"><td>Thursday</td><td>7 am – 5 pm</td></tr><tr data-day="5"><td>Friday</td><td>7 am – 5 pm</td></tr><tr data-day="6"><td>Saturday</td><td>7 am – 5 pm</td></tr><tr data-day="0"><td>Sunday</td><td>7 am – 4 pm</td></tr></tbody></table>
-        <p class="small" style="color:var(--muted);margin-top:8px">Public holiday hours may vary.</p>
+  <div class="wrap footer__top">
+    <div class="footer__intro" data-reveal>
+      <p class="lead">A little café and patisserie at East Village, Sunbury. A little sweetness for every occasion.</p>
+      <p class="status" data-open><span class="dot"></span>Open today</p>
+    </div>
+    <div class="footer__col" data-reveal>
+      <h4>Visit</h4>
+      <p>6B/2 Rhye Street, Building A, East Village, Sunbury VIC 3429</p>
+      <p><a href="tel:0452209929">0452 209 929</a></p>
+      <p><a href="mailto:admin@goldensparrowpatisserie.com.au">admin@goldensparrowpatisserie.com.au</a></p>
+    </div>
+    <div class="footer__col" data-reveal>
+      <h4>Explore</h4>
+      <ul><li><a href="menu.html">Menu</a></li><li><a href="about.html">Our story</a></li><li><a href="faq.html">FAQ</a></li><li><a href="index.html#visit">Visit</a></li><li><a href="https://www.google.com/maps/search/?api=1&query=Golden+Sparrow+Patisserie+East+Village+Sunbury">Get directions</a></li></ul>
+    </div>
+    <div class="footer__col footer__hours" data-reveal>
+      <h4>Opening hours</h4>
+      <table class="hours"><tbody><tr data-day="1"><td>Monday</td><td>7 am – 5 pm</td></tr><tr data-day="2"><td>Tuesday</td><td>7 am – 5 pm</td></tr><tr data-day="3"><td>Wednesday</td><td>7 am – 5 pm</td></tr><tr data-day="4"><td>Thursday</td><td>7 am – 5 pm</td></tr><tr data-day="5"><td>Friday</td><td>7 am – 5 pm</td></tr><tr data-day="6"><td>Saturday</td><td>7 am – 5 pm</td></tr><tr data-day="0"><td>Sunday</td><td>7 am – 4 pm</td></tr></tbody></table>
+      <p class="small footer__note">Public holiday hours may vary.</p>
+    </div>
+  </div>
+  <div class="footer__hero">
+    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=2000&q=80" alt="" loading="lazy" decoding="async">
+    <div class="wrap footer__brand">
+      <img class="footer__wordmark" src="assets/img/logo-wordmark.webp" alt="Golden Sparrow Patisserie" loading="lazy">
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> Golden Sparrow Patisserie. All rights reserved.</span>
+        <span>Website by <a href="https://www.novalinkinnovations.com">NovaLink Innovations</a></span>
       </div>
     </div>
-    <div class="footer__img" data-reveal="img"><div class="ph "><img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1800&q=80" srcset="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=900&q=80 900w, https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1800&q=80 1800w" sizes="(max-width: 760px) 100vw, 50vw" alt="Inside a warm, busy café" loading="lazy" decoding="async"></div></div>
-  </div>
-  <div class="wrap"><div class="footer__word" aria-hidden="true">golden sparrow</div></div>
-  <div class="wrap footer__bottom">
-    <span>© <span data-year>2026</span> Golden Sparrow Patisserie. All rights reserved.</span>
-    <span>Website by <a href="https://www.novalinkinnovations.com">NovaLink Innovations</a></span>
   </div>
 </footer>
-<script src="assets/main.js?v=3"></script>
+<script src="assets/main.js?v=4"></script>
 </body>
 </html>

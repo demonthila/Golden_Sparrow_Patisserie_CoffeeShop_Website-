@@ -60,6 +60,7 @@ IMG = {
     "interior": "photo-1555396273-367ea4eb4db5",
     "barista": "photo-1532713107108-dfb5d8d2fc42",
     "shopfront": "photo-1521017432531-fbd92d768814",
+    "footer": "photo-1555396273-367ea4eb4db5",
 }
 def src(key, w=1200):
     v = IMG[key]
@@ -108,15 +109,10 @@ def head(title, desc, page, extra=""):
 <link rel="apple-touch-icon" href="assets/img/favicon.png">
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=3">
+<link rel="stylesheet" href="assets/style.css?v=4">
 {schema()}{extra}
 </head>
 <body>
-<div class="loader" aria-hidden="true">
-  <div>
-    <img class="loader__logo" src="assets/img/logo-full.webp" alt="" width="200" height="177">
-  </div>
-</div>
 '''
 
 def nav(active):
@@ -138,37 +134,39 @@ def nav(active):
 
 def footer():
     return f'''<footer class="footer">
-  <div class="wrap">
-    <div class="footer__top" data-stagger=".08">
-      <div data-reveal>
-        <img class="footer__logo" src="assets/img/logo-full.webp" alt="{BIZ["name"]}" width="180" height="159" loading="lazy">
-        <p class="small" style="margin-top:14px;color:var(--gold-2)">{BIZ["tagline"]}.</p>
-        <div class="pill" data-open><span class="dot"></span>Open today</div>
-      </div>
-      <div data-reveal>
-        <h4>Visit</h4>
-        <p>6B/2 Rhye Street, Building A<br>East Village, {BIZ["suburb"]} {BIZ["state"]} {BIZ["postcode"]}</p>
-        <p style="margin-top:12px"><a href="tel:{BIZ["phone"].replace(" ", "")}">{BIZ["phone"]}</a><br><a href="mailto:{BIZ["email"]}">{BIZ["email"]}</a></p>
-      </div>
-      <div data-reveal>
-        <h4>Explore</h4>
-        <ul><li><a href="menu.html">Menu</a></li><li><a href="about.html">Our story</a></li><li><a href="faq.html">FAQ</a></li><li><a href="{BIZ["maps"]}">Get directions</a></li></ul>
-      </div>
-      <div data-reveal>
-        <h4>Hours</h4>
-        <table class="hours"><tbody>{hours_rows()}</tbody></table>
-        <p class="small" style="color:var(--muted);margin-top:8px">Public holiday hours may vary.</p>
+  <div class="wrap footer__top">
+    <div class="footer__intro" data-reveal>
+      <p class="lead">A little café and patisserie at East Village, Sunbury. {BIZ["tagline"]}.</p>
+      <p class="status" data-open><span class="dot"></span>Open today</p>
+    </div>
+    <div class="footer__col" data-reveal>
+      <h4>Visit</h4>
+      <p>{BIZ["street"]}, {BIZ["suburb"]} {BIZ["state"]} {BIZ["postcode"]}</p>
+      <p><a href="tel:{BIZ["phone"].replace(" ", "")}">{BIZ["phone"]}</a></p>
+      <p><a href="mailto:{BIZ["email"]}">{BIZ["email"]}</a></p>
+    </div>
+    <div class="footer__col" data-reveal>
+      <h4>Explore</h4>
+      <ul><li><a href="menu.html">Menu</a></li><li><a href="about.html">Our story</a></li><li><a href="faq.html">FAQ</a></li><li><a href="index.html#visit">Visit</a></li><li><a href="{BIZ["maps"]}">Get directions</a></li></ul>
+    </div>
+    <div class="footer__col footer__hours" data-reveal>
+      <h4>Opening hours</h4>
+      <table class="hours"><tbody>{hours_rows()}</tbody></table>
+      <p class="small footer__note">Public holiday hours may vary.</p>
+    </div>
+  </div>
+  <div class="footer__hero">
+    <img src="{src("footer", 2000)}" alt="" loading="lazy" decoding="async">
+    <div class="wrap footer__brand">
+      <img class="footer__wordmark" src="assets/img/logo-wordmark.webp" alt="{BIZ["name"]}" loading="lazy">
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> {BIZ["name"]}. All rights reserved.</span>
+        <span>Website by <a href="https://www.novalinkinnovations.com">NovaLink Innovations</a></span>
       </div>
     </div>
-    <div class="footer__img" data-reveal="img">{photo("shopfront", "Inside a warm, busy café", 1800)}</div>
-  </div>
-  <div class="wrap"><div class="footer__word" aria-hidden="true">golden sparrow</div></div>
-  <div class="wrap footer__bottom">
-    <span>© <span data-year>2026</span> {BIZ["name"]}. All rights reserved.</span>
-    <span>Website by <a href="https://www.novalinkinnovations.com">NovaLink Innovations</a></span>
   </div>
 </footer>
-<script src="assets/main.js?v=3"></script>
+<script src="assets/main.js?v=4"></script>
 </body>
 </html>
 '''
@@ -218,9 +216,9 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
   <div class="wrap">
     <h1 class="sr-only" id="hero-title">{BIZ["name"]}, café and patisserie in Sunbury</h1>
     <div class="hero__grid">
-      <p class="display hero__left" aria-hidden="true"><span class="line"><span>A little</span></span><span class="line"><span>sweetness</span></span></p>
+      <p class="display hero__left from-left" aria-hidden="true"><span class="line"><span>A little</span></span><span class="line"><span>sweetness</span></span></p>
       <div class="hero__img">{photo("hero", "Latte with heart latte art at Golden Sparrow Patisserie", 900, eager=True)}</div>
-      <p class="display hero__right" aria-hidden="true"><span class="line"><span>for every</span></span><span class="line"><span class="gold">occasion</span></span></p>
+      <p class="display hero__right from-right" aria-hidden="true"><span class="line"><span>for every</span></span><span class="line"><span class="gold">occasion</span></span></p>
     </div>
     <div class="hero__bottom">
       <p class="lead">Coffee, cakes, golden churros and a warm welcome, at East Village in Sunbury. Pull up a chair or take something sweet to go.</p>

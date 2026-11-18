@@ -9,7 +9,7 @@
   try { seen = sessionStorage.getItem('gs-intro') === '1'; sessionStorage.setItem('gs-intro', '1'); } catch (e) {}
   if (seen || reduce) { doc.classList.add('no-loader'); }
   window.addEventListener('load', function () {
-    setTimeout(function () { doc.classList.add('is-loaded'); }, seen || reduce ? 30 : 1500);
+    setTimeout(function () { doc.classList.add('is-loaded'); }, 60);
   });
   // safety net if load is slow
   setTimeout(function () { doc.classList.add('is-loaded'); }, 3500);
