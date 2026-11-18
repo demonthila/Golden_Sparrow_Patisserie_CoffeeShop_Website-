@@ -109,7 +109,7 @@ def head(title, desc, page, extra=""):
 <link rel="apple-touch-icon" href="assets/img/favicon.png">
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="assets/style.css?v=5">
+<link rel="stylesheet" href="assets/style.css?v=6">
 {schema()}{extra}
 </head>
 <body>
@@ -137,7 +137,7 @@ def footer():
     return f'''<footer class="footer">
   <div class="wrap footer__top">
     <div class="footer__intro" data-reveal>
-      <p class="lead">A little café and patisserie at East Village, Sunbury. {BIZ["tagline"]}.</p>
+      <p class="footer__tag">A little café and patisserie at East Village in Sunbury.</p>
       <p class="status" data-open><span class="dot"></span>Open today</p>
     </div>
     <div class="footer__col" data-reveal>
@@ -158,16 +158,14 @@ def footer():
   </div>
   <div class="footer__hero">
     <img src="{src("footer", 2000)}" alt="" loading="lazy" decoding="async">
-    <div class="wrap footer__brand">
-      <img class="footer__wordmark" src="assets/img/logo-wordmark.webp" alt="{BIZ["name"]}" loading="lazy">
-      <div class="footer__bottom">
-        <span>© <span data-year>2026</span> {BIZ["name"]}. All rights reserved.</span>
-        <span>Website by <a href="https://www.novalinkinnovations.com">NovaLink Innovations</a></span>
-      </div>
-    </div>
+    <div class="footer__word" aria-hidden="true"><span data-fit>golden sparrow</span></div>
+  </div>
+  <div class="wrap footer__bottom">
+    <span>© <span data-year>2026</span> {BIZ["name"]}. All rights reserved.</span>
+    <span class="footer__links"><a href="contact.html">Contact</a><a href="https://www.novalinkinnovations.com">Website by NovaLink</a></span>
   </div>
 </footer>
-<script src="assets/main.js?v=5"></script>
+<script src="assets/main.js?v=6"></script>
 </body>
 </html>
 '''

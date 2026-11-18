@@ -388,3 +388,28 @@ html, body { overflow-x: clip; }
   .contact, .field-row { grid-template-columns: 1fr; }
   .map--wide { aspect-ratio: 4 / 3; }
 }
+
+/* ---------- Footer v2 – matches reference ---------- */
+.footer { padding-top: 120px; }
+.footer__top { grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.footer .footer__tag { font-size: clamp(24px, 2.2vw, 32px); line-height: 1.2; letter-spacing: -.02em; font-weight: 500; max-width: 13em; color: var(--cream); }
+.status { margin-top: 26px; font-size: 15px; }
+.footer h4 { font-size: 15px; margin: 0 0 14px; }
+.footer__col p, .footer__col li { font-size: 18px; line-height: 1.35; margin: 0 0 15px; }
+.footer .hours td { padding: 15px 0; font-size: 18px; }
+.footer .hours td:last-child { font-weight: 500; }
+.footer .hours tr:first-child td { border-top: 1px solid rgba(246,241,231,.1); }
+.footer__hours h4 { margin-bottom: 0; padding-bottom: 14px; }
+.footer__hero { margin-top: 130px; height: clamp(360px, 39vw, 620px); }
+.footer__hero > img { filter: brightness(.55) saturate(.85); }
+.footer__hero::before { background: linear-gradient(to bottom, var(--ink) 0%, rgba(28,31,22,.55) 28%, rgba(28,31,22,.1) 60%, rgba(28,31,22,.25) 100%); }
+.footer__hero::after { content: ""; position: absolute; left: 0; top: 0; width: 65%; height: 1px; background: rgba(246,241,231,.12); z-index: 2; }
+.footer__brand, .footer__wordmark { display: none; }
+.footer__word { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; padding: 0 var(--pad); margin: 0; color: var(--cream); font-weight: 500; letter-spacing: -.055em; line-height: .9; white-space: nowrap; user-select: none; overflow: visible; }
+.footer__word span { display: block; font-size: 13vw; transform: none; width: max-content; padding-bottom: .06em; }
+.footer .footer__bottom { padding: 26px var(--pad) 32px; font-size: 15px; color: var(--muted); }
+.footer__links { display: flex; gap: 24px; }
+.footer__links a { color: var(--cream); }
+.footer__links a:hover { color: var(--gold-2); }
+@media (max-width: 960px) { .footer__top { grid-template-columns: 1fr 1fr; gap: 48px 32px; } }
+@media (max-width: 760px) { .footer__top { grid-template-columns: 1fr; } .footer__hero { height: 360px; margin-top: 80px; } .footer__col p, .footer__col li, .footer .hours td { font-size: 16px; } }

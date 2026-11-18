@@ -189,6 +189,26 @@
     });
   }
 
+  /* ---------- Fit the footer word to the full width ---------- */
+  function fit() {
+    document.querySelectorAll('[data-fit]').forEach(function (el) {
+      var box = el.parentElement, cs = getComputedStyle(box);
+      var avail = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var size = 100;
+      el.style.display = 'inline-block';
+      for (var i = 0; i < 4; i++) {
+        el.style.fontSize = size + 'px';
+        var w = el.getBoundingClientRect().width;
+        if (!w) break;
+        size = size * avail / w;
+      }
+      el.style.fontSize = Math.floor(size * 100) / 100 + 'px';
+      el.style.display = 'block';
+    });
+  }
+  fit(); window.addEventListener('resize', fit); window.addEventListener('load', fit); setTimeout(fit, 800);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+
   /* ---------- Footer year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();
