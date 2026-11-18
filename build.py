@@ -316,8 +316,7 @@ menu_cats = [
         ("sandwich", "Toasted sandwiches", "Golden toasted sandwiches with your favourite fillings."),
     ]),
     ("churros", "Golden churros", "Our sweet signature, crisp and golden.", [
-        ("churros", "Golden churros", "Crisp, golden and dusted with sugar."),
-        ("churroscoffee", "Churros & coffee", "The perfect pairing for a sweet break."),
+        ("churroscoffee", "Golden churros", "Crisp, golden and dusted with sugar. Perfect with a coffee."),
     ]),
     ("fries", "Golden fries", "Crispy and perfectly seasoned.", [
         ("fries", "Golden fries", "Crispy, golden and perfectly seasoned."),
