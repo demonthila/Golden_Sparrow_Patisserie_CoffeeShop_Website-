@@ -300,6 +300,59 @@
     t.setAttribute('data-lenis-prevent-wheel', '');
   });
 
+  /* ---------- Menu search + filter ---------- */
+  (function () {
+    var bar = document.querySelector('.mf');
+    if (!bar) return;
+    var input = document.getElementById('menu-search');
+    var clear = bar.querySelector('.mf__clear');
+    var chips = [].slice.call(bar.querySelectorAll('.mf__chip'));
+    var cats = [].slice.call(document.querySelectorAll('.mcat[data-group]'));
+    var info = document.querySelector('.mcat--info');
+    var empty = document.querySelector('.mf__empty');
+    var group = 'all';
+    var norm = function (s) { return (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/&/g, 'and'); };
+    cats.forEach(function (c) {
+      c.querySelectorAll('.mi').forEach(function (m) { m.dataset.text = norm(m.textContent + ' ' + c.querySelector('.mcat__title').textContent); });
+    });
+    function apply(scroll) {
+      var q = norm(input.value.trim());
+      var words = q ? q.split(/\s+/) : [];
+      var shown = 0;
+      cats.forEach(function (c) {
+        var inGroup = group === 'all' || c.dataset.group === group;
+        var n = 0;
+        c.querySelectorAll('.mi').forEach(function (m) {
+          var ok = inGroup && words.every(function (w) { return m.dataset.text.indexOf(w) > -1; });
+          m.hidden = !ok;
+          if (ok) { n++; m.classList.add('in', 'is-in'); }
+        });
+        c.hidden = n === 0;
+        var ex = c.querySelector('.kvlist--extras'); if (ex) ex.hidden = !!q && n === 0;
+        shown += n;
+      });
+      if (info) info.hidden = !!q || group !== 'all';
+      empty.hidden = shown > 0;
+      clear.hidden = !input.value;
+      if (window.__lenis && window.__lenis.resize) window.__lenis.resize();
+      if (scroll) {
+        var top = bar.getBoundingClientRect().top + window.scrollY;
+        if (window.scrollY > top + 2) { window.__lenis ? window.__lenis.scrollTo(top, { duration: 0.6 }) : window.scrollTo(0, top); }
+      }
+    }
+    chips.forEach(function (ch) {
+      ch.addEventListener('click', function () {
+        group = ch.dataset.group;
+        chips.forEach(function (o) { var on = o === ch; o.classList.toggle('is-active', on); o.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+        apply(true);
+      });
+    });
+    var t;
+    input.addEventListener('input', function () { clearTimeout(t); t = setTimeout(function () { apply(false); }, 120); });
+    input.addEventListener('keydown', function (e) { if (e.key === 'Escape') { input.value = ''; apply(false); } if (e.key === 'Enter') { e.preventDefault(); input.blur(); apply(true); } });
+    clear.addEventListener('click', function () { input.value = ''; apply(false); input.focus(); });
+  })();
+
   /* ---------- Footer year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
 })();

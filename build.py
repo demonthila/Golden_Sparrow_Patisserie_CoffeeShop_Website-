@@ -144,7 +144,7 @@ def head(title, desc, page, extra=""):
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{{var n=(performance.getEntriesByType('navigation')[0]||{{}}).type,r=document.referrer,i=n==='reload'||!r||new URL(r).origin!==location.origin;if(!i)document.documentElement.classList.add('intro-done')}}catch(e){{}}</script>
-<link rel="stylesheet" href="assets/style.css?v=15">
+<link rel="stylesheet" href="assets/style.css?v=16">
 {schema()}{extra}
 </head>
 <body>
@@ -202,7 +202,7 @@ def footer():
   </div>
 </footer>
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/main.js?v=13"></script>
+<script src="assets/main.js?v=14"></script>
 </body>
 </html>
 '''
@@ -460,12 +460,31 @@ def mitem(key, name, note, tags):
   </div>
 </article>'''
 
+MENU_GROUPS = [("all", "All"), ("hot", "Hot drinks"), ("cold", "Iced &amp; cold"), ("shakes", "Smoothies &amp; shakes"),
+               ("food", "Food"), ("sweet", "Sweets &amp; bakery")]
+CAT_GROUP = {"hot": "hot", "signature": "hot", "cold": "cold", "smoothies": "shakes", "frappes": "shakes",
+             "milkshakes": "shakes", "toasties": "food", "grillers": "food", "fries": "food",
+             "churros": "sweet", "softserve": "sweet", "bakery": "sweet"}
+chips = "".join(f'<button type="button" class="mf__chip{" is-active" if k == "all" else ""}" data-group="{k}" aria-pressed="{"true" if k == "all" else "false"}">{t}</button>' for k, t in MENU_GROUPS)
+menu_filter = f'''<div class="mf" role="search">
+  <div class="wrap mf__inner">
+    <label class="mf__search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="sr-only">Search the menu</span>
+      <input type="search" id="menu-search" placeholder="Search, e.g. matcha, churros, chicken" autocomplete="off">
+      <button type="button" class="mf__clear" aria-label="Clear search" hidden>&times;</button>
+    </label>
+    <div class="mf__chips" role="group" aria-label="Filter by category">{chips}</div>
+  </div>
+</div>
+<p class="mf__empty wrap" hidden>No matches. Try another word, or just ask our team, we're happy to help.</p>'''
+
 menu_html = ""
 for cat in menu_cats:
     key, title, sub, items = cat[:4]
     extras = cat[4] if len(cat) > 4 else []
     extra_html = ('<div class="kvlist kvlist--extras">' + "".join(f'<div class="kv"><span>{k}</span><span>{v}</span></div>' for k, v in extras) + '</div>') if extras else ""
-    menu_html += f'''<section class="mcat" id="{key}" aria-labelledby="{key}-h">
+    menu_html += f'''<section class="mcat" id="{key}" data-group="{CAT_GROUP[key]}" aria-labelledby="{key}-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="{key}-h" data-reveal>{title}</h2>
@@ -475,7 +494,7 @@ for cat in menu_cats:
   </div>
 </section>'''
 gtk_rows = "".join(f'<div class="kv" data-reveal><span>{k}</span><span>{v}</span></div>' for k, v in good_to_know)
-menu_html += f'''<section class="mcat" id="good-to-know" aria-labelledby="gtk-h">
+menu_html += f'''<section class="mcat mcat--info" id="good-to-know" aria-labelledby="gtk-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="gtk-h" data-reveal>Good to know</h2>
@@ -500,6 +519,7 @@ menu = head(f'Menu · {BIZ["name"]}, Sunbury',
     <div class="mhead__img" data-reveal="img">{photo("cappuccino", "Cappuccino at Golden Sparrow Patisserie", 700)}</div>
   </div>
 </section>
+{menu_filter}
 {menu_html}
 </main>
 ''' + footer()

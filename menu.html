@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://www.goldensparrowpatisserie.com.au/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{var n=(performance.getEntriesByType('navigation')[0]||{}).type,r=document.referrer,i=n==='reload'||!r||new URL(r).origin!==location.origin;if(!i)document.documentElement.classList.add('intro-done')}catch(e){}</script>
-<link rel="stylesheet" href="assets/style.css?v=15">
+<link rel="stylesheet" href="assets/style.css?v=16">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CafeOrCoffeeShop", "name": "Golden Sparrow Patisserie", "url": "https://www.goldensparrowpatisserie.com.au", "slogan": "A little sweetness for every occasion", "telephone": "0452 209 929", "email": "admin@goldensparrowpatisserie.com.au", "servesCuisine": ["Coffee", "Patisserie", "Cakes", "Churros", "Sandwiches"], "address": {"@type": "PostalAddress", "streetAddress": "6B/2 Rhye Street, Building A, East Village", "addressLocality": "Sunbury", "addressRegion": "VIC", "postalCode": "3429", "addressCountry": "AU"}, "openingHours": ["Mo-Sa 07:00-17:00", "Su 07:00-16:00"], "hasMenu": "https://www.goldensparrowpatisserie.com.au/menu.html", "paymentAccepted": "Card, Tap and go, Apple Pay, Google Pay, Cash", "acceptsReservations": false}</script>
 </head>
 <body>
@@ -43,7 +43,19 @@
     <div class="mhead__img" data-reveal="img"><div class="ph "><img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=80" srcset="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=350&q=80 350w, https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=80 700w" sizes="(max-width: 760px) 100vw, 50vw" alt="Cappuccino at Golden Sparrow Patisserie" loading="lazy" decoding="async"></div></div>
   </div>
 </section>
-<section class="mcat" id="hot" aria-labelledby="hot-h">
+<div class="mf" role="search">
+  <div class="wrap mf__inner">
+    <label class="mf__search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <span class="sr-only">Search the menu</span>
+      <input type="search" id="menu-search" placeholder="Search, e.g. matcha, churros, chicken" autocomplete="off">
+      <button type="button" class="mf__clear" aria-label="Clear search" hidden>&times;</button>
+    </label>
+    <div class="mf__chips" role="group" aria-label="Filter by category"><button type="button" class="mf__chip is-active" data-group="all" aria-pressed="true">All</button><button type="button" class="mf__chip" data-group="hot" aria-pressed="false">Hot drinks</button><button type="button" class="mf__chip" data-group="cold" aria-pressed="false">Iced &amp; cold</button><button type="button" class="mf__chip" data-group="shakes" aria-pressed="false">Smoothies &amp; shakes</button><button type="button" class="mf__chip" data-group="food" aria-pressed="false">Food</button><button type="button" class="mf__chip" data-group="sweet" aria-pressed="false">Sweets &amp; bakery</button></div>
+  </div>
+</div>
+<p class="mf__empty wrap" hidden>No matches. Try another word, or just ask our team, we're happy to help.</p>
+<section class="mcat" id="hot" data-group="hot" aria-labelledby="hot-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="hot-h" data-reveal>Hot drinks</h2>
@@ -149,7 +161,7 @@
   </div>
 </article></div>
   </div>
-</section><section class="mcat" id="signature" aria-labelledby="signature-h">
+</section><section class="mcat" id="signature" data-group="hot" aria-labelledby="signature-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="signature-h" data-reveal>Signature drinks</h2>
@@ -192,7 +204,7 @@
   </div>
 </article></div>
   </div>
-</section><section class="mcat" id="cold" aria-labelledby="cold-h">
+</section><section class="mcat" id="cold" data-group="cold" aria-labelledby="cold-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="cold-h" data-reveal>Cold drinks</h2>
@@ -249,7 +261,7 @@
   </div>
 </article></div>
   </div>
-</section><section class="mcat" id="smoothies" aria-labelledby="smoothies-h">
+</section><section class="mcat" id="smoothies" data-group="shakes" aria-labelledby="smoothies-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="smoothies-h" data-reveal>Smoothies</h2>
@@ -278,7 +290,7 @@
   </div>
 </article></div>
   </div>
-</section><section class="mcat" id="frappes" aria-labelledby="frappes-h">
+</section><section class="mcat" id="frappes" data-group="shakes" aria-labelledby="frappes-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="frappes-h" data-reveal>Frappes</h2>
@@ -328,7 +340,7 @@
   </div>
 </article></div>
   </div>
-</section><section class="mcat" id="milkshakes" aria-labelledby="milkshakes-h">
+</section><section class="mcat" id="milkshakes" data-group="shakes" aria-labelledby="milkshakes-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="milkshakes-h" data-reveal>Milkshakes</h2>
@@ -343,7 +355,7 @@
   </div>
 </article><div class="kvlist kvlist--extras"><div class="kv"><span>Add malt</span><span>Available</span></div><div class="kv"><span>Extra flavour</span><span>Available</span></div><div class="kv"><span>Make it a thick shake</span><span>Available</span></div></div></div>
   </div>
-</section><section class="mcat" id="toasties" aria-labelledby="toasties-h">
+</section><section class="mcat" id="toasties" data-group="food" aria-labelledby="toasties-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="toasties-h" data-reveal>Toasties &amp; bakery</h2>
@@ -379,7 +391,7 @@
   </div>
 </article></div>
   </div>
-</section><section class="mcat" id="grillers" aria-labelledby="grillers-h">
+</section><section class="mcat" id="grillers" data-group="food" aria-labelledby="grillers-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="grillers-h" data-reveal>Grillers</h2>
@@ -408,7 +420,7 @@
   </div>
 </article></div>
   </div>
-</section><section class="mcat" id="churros" aria-labelledby="churros-h">
+</section><section class="mcat" id="churros" data-group="sweet" aria-labelledby="churros-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="churros-h" data-reveal>Golden churros</h2>
@@ -430,7 +442,7 @@
   </div>
 </article><div class="kvlist kvlist--extras"><div class="kv"><span>Dipping sauces</span><span>Milk chocolate · White chocolate · Strawberry cream</span></div><div class="kv"><span>Add a little extra</span><span>Biscoff or Nutella</span></div></div></div>
   </div>
-</section><section class="mcat" id="fries" aria-labelledby="fries-h">
+</section><section class="mcat" id="fries" data-group="food" aria-labelledby="fries-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="fries-h" data-reveal>Sparrow fries</h2>
@@ -445,7 +457,7 @@
   </div>
 </article><div class="kvlist kvlist--extras"><div class="kv"><span>Season with</span><span>Herb salt · Chicken salt · Sea salt</span></div><div class="kv"><span>Add a sauce</span><span>Available</span></div></div></div>
   </div>
-</section><section class="mcat" id="softserve" aria-labelledby="softserve-h">
+</section><section class="mcat" id="softserve" data-group="sweet" aria-labelledby="softserve-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="softserve-h" data-reveal>Soft serve</h2>
@@ -467,7 +479,7 @@
   </div>
 </article></div>
   </div>
-</section><section class="mcat" id="bakery" aria-labelledby="bakery-h">
+</section><section class="mcat" id="bakery" data-group="sweet" aria-labelledby="bakery-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="bakery-h" data-reveal>Bakery favourites</h2>
@@ -510,7 +522,7 @@
   </div>
 </article></div>
   </div>
-</section><section class="mcat" id="good-to-know" aria-labelledby="gtk-h">
+</section><section class="mcat mcat--info" id="good-to-know" aria-labelledby="gtk-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="gtk-h" data-reveal>Good to know</h2>
@@ -555,6 +567,6 @@
   </div>
 </footer>
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/main.js?v=13"></script>
+<script src="assets/main.js?v=14"></script>
 </body>
 </html>
