@@ -565,3 +565,5 @@ body { background: var(--paper); }
 .hero__img .ph > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.08); transition: transform 2s var(--ease) .1s; }
 .is-loaded .hero__img .ph > video { transform: none; }
 .hero__img .ph { background: #3a2a1f; }
+.kvlist--extras { margin-top: 4px; }
+.kvlist--extras .kv { font-size: 16px; padding: 16px 0; }

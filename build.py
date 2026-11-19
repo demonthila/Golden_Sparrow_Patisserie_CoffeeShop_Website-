@@ -62,6 +62,36 @@ IMG = {
     "shopfront": "photo-1521017432531-fbd92d768814",
     "footer": "photo-1762686852371-763b689910b2",
     "espresso": "photo-1475296204602-08d15839e95f",
+    "mango": "photo-1623065422902-30a2d299bbe4",
+    "tropical": "photo-1778449270554-3e5b17cfebc6",
+    "strawberrysm": "photo-1579954115545-a95591f28bfc",
+    "frappe": "photo-1718267050202-9b1b6bfb8545",
+    "chocfrappe": "photo-1696487773677-c0c8061fe3d2",
+    "cookiefrappe": "photo-1572490122747-3968b75cc699",
+    "caramelfrappe": "photo-1761673930163-8d3d6d73cd7a",
+    "milkshake": "photo-1553787499-6f9133860278",
+    "griller": "photo-1655279562015-047c3da9a271",
+    "griller2": "photo-1621852004158-f3bc188ace2d",
+    "hccroissant": "photo-1530610476181-d83430b64dcd",
+    "bananabread": "photo-1767065887793-f68f736ea9d6",
+    "scones": "photo-1589114471223-dec0d8d572c6",
+    "pies": "photo-1545668855-b923f0176935",
+    "almondcroissant": "photo-1759303380903-11154bc5d5bf",
+    "raisintoast": "photo-1782846105211-5543693408ce",
+    "affogato": "photo-1696522692156-7340b681c3bb",
+    "tea": "photo-1544787219-7f47ccb76574",
+    "icedcoffee": "photo-1517701550927-30cf4ba1dba5",
+    "icedmocha": "photo-1549652127-2e5e59e86a7a",
+    "shortblack": "photo-1579992357154-faf4bde95b3d",
+    "longblack": "photo-1510591509098-f4fdc6d0ff04",
+    "hotchoc": "photo-1517578239113-b03992dcdd25",
+    "whitemocha": "photo-1475759697283-38cc56e4455a",
+    "piccolo": "photo-1610889556528-9a770e32642f",
+    "vienna": "photo-1627777620905-53a332869051",
+    "icedchai": "photo-1559496417-e7f25cb247f3",
+    "icedlongblack": "photo-1578314675249-a6910f80cc4e",
+    "mocha": "photo-1542990253-0d0f5be5f0ed",
+    "whitechoc": "photo-1762411238451-b90dd1c74238",
     "beans": "photo-1447933601403-0c6688de566e",
     "latteart": "photo-1541167760496-1628856ab772",
     "croissantcoffee": "photo-1565252556328-92ee4a9a0983",  # coffee plantation hillside
@@ -114,7 +144,7 @@ def head(title, desc, page, extra=""):
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{{var n=(performance.getEntriesByType('navigation')[0]||{{}}).type,r=document.referrer,i=n==='reload'||!r||new URL(r).origin!==location.origin;if(!i)document.documentElement.classList.add('intro-done')}}catch(e){{}}</script>
-<link rel="stylesheet" href="assets/style.css?v=14">
+<link rel="stylesheet" href="assets/style.css?v=15">
 {schema()}{extra}
 </head>
 <body>
@@ -216,7 +246,7 @@ def visit_section():
   </div>
 </section>'''
 
-MARQ = "".join(f'<span>{t}</span><img src="assets/img/logo-bird.webp" alt="">' for t in ['Freshly brewed coffee', 'Golden churros', 'Cakes for every occasion', 'Matcha lattes', 'Raffaello hot chocolate', 'Soft serve sundaes', 'Toasted sandwiches', 'Catering platters'])
+MARQ = "".join(f'<span>{t}</span><img src="assets/img/logo-bird.webp" alt="">' for t in ['Freshly brewed coffee', 'Golden churros', 'Raffaello hot chocolate', 'Smoothies', 'Frappes', 'Milkshakes', 'Grillers', 'Sparrow fries', 'Soft serve sundaes', 'Bakery favourites'])
 
 def gallery():
     items = [("latteart", "Latte art, poured by hand"), ("espresso", "Espresso, pulled fresh"), ("croissantcoffee", "Coffee &amp; something sweet"), ("beans", "Locally roasted beans"), ("macarons", "Little treats from the cabinet")]
@@ -335,33 +365,84 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
 
 # ------------------------------------------------------------------ MENU
 # NOTE: sample items until Vani's menu PDF arrives — replace with the real menu. No prices (client request).
+# Real menu from Golden Sparrow Patisserie (Nov 2026). No prices on the website (client request).
 menu_cats = [
-    ("hot", "Hot drinks", "Made fresh to order, just the way you like it. Ask us about milk options.", [
-        ("cappuccino", "Cappuccino", "Velvety foam with a dusting of chocolate.", ["Hot", "Coffee"]),
-        ("latte", "Latte", "Smooth espresso with creamy steamed milk.", ["Hot", "Coffee"]),
-        ("flatwhite", "Flat White", "Silky milk over a double shot.", ["Hot", "Coffee"]),
-        ("matcha", "Matcha Latte", "Creamy, calming and beautifully green.", ["Hot", "Signature"]),
-        ("raffaello", "Raffaello Hot Chocolate", "White chocolate, coconut and almond. Pure indulgence.", ["Hot", "Signature"]),
-        ("chai", "Chai Latte", "Warm spices and steamed milk.", ["Hot"]),
+    ("hot", "Hot drinks", "Made fresh to order, just the way you like it.", [
+        ("cappuccino", "Cappuccino", "Velvety foam with a dusting of chocolate.", ["Coffee"]),
+        ("latte", "Caffè Latte", "Smooth espresso with creamy steamed milk.", ["Coffee"]),
+        ("flatwhite", "Flat White", "Silky milk over a double shot.", ["Coffee"]),
+        ("longblack", "Long Black", "Espresso over hot water. Bold and clean.", ["Coffee"]),
+        ("shortblack", "Short Black", "A short, rich shot of espresso.", ["Coffee"]),
+        ("mocha", "Mocha", "Espresso, chocolate and steamed milk.", ["Coffee", "Chocolate"]),
+        ("hotchoc", "Hot Chocolate", "Rich, creamy and comforting.", ["Chocolate"]),
+        ("chai", "Chai Latte", "Warm spices and steamed milk.", ["Spiced"]),
+        ("affogato", "Affogato", "Vanilla ice cream drowned in a shot of espresso.", ["Coffee", "Sweet treat"]),
+        ("vienna", "Vienna", "Espresso topped with whipped cream.", ["Coffee"]),
+        ("piccolo", "Piccolo", "A ristretto shot with a little silky milk.", ["Coffee"]),
+        ("shortblack", "Short Macchiato", "Espresso marked with a touch of milk foam.", ["Coffee"]),
+        ("piccolo", "Long Macchiato", "A double shot marked with milk foam.", ["Coffee"]),
+        ("tea", "Tea", "A selection of flavours.", ["Tea"]),
+    ]),
+    ("signature", "Signature drinks", "Our house favourites. Sip something special and indulge in every sip.", [
+        ("whitemocha", "White Mocha", "Espresso with creamy white chocolate.", ["Signature", "Coffee"]),
+        ("whitechoc", "White Chocolate", "Velvety white chocolate and steamed milk.", ["Signature"]),
+        ("raffaello", "Raffaello Hot Chocolate", "White chocolate, coconut and almond. Pure indulgence.", ["Signature"]),
+        ("matcha", "Matcha", "Creamy, calming and beautifully green.", ["Signature"]),
+        ("chai", "Dirty Chai", "Spiced chai with a shot of espresso.", ["Signature", "Coffee"]),
     ]),
     ("cold", "Cold drinks", "Poured over ice, made to order. Perfect for warm Sunbury afternoons.", [
-        ("icedchoc", "Iced Chocolate", "Rich chocolate over ice, finished with cream.", ["Iced", "Signature"]),
+        ("icedcoffee", "Iced Coffee", "Chilled coffee over ice.", ["Iced", "Coffee"]),
+        ("icedchoc", "Iced Chocolate", "Rich chocolate over ice, finished with cream.", ["Iced", "Chocolate"]),
+        ("icedchai", "Iced Chai", "Spiced chai over ice.", ["Iced"]),
         ("icedlatte", "Iced Latte", "Espresso over ice with cold milk.", ["Iced", "Coffee"]),
+        ("icedmocha", "Iced Mocha", "Espresso, chocolate and milk over ice.", ["Iced", "Coffee"]),
         ("icedmatcha", "Iced Matcha", "Matcha and milk over ice.", ["Iced"]),
+        ("icedlongblack", "Iced Long Black", "Espresso over ice and cold water.", ["Iced", "Coffee"]),
     ]),
-    ("food", "Sandwiches &amp; all day", "Freshly made every day, for breakfast, lunch or anything in between.", [
-        ("sandwich", "Toasted sandwiches", "Golden toasted sandwiches with your favourite fillings.", ["Made fresh"]),
-        ("fries", "Golden fries", "Crispy, golden and perfectly seasoned.", ["Hot", "Great to share"]),
+    ("smoothies", "Smoothies", "Blended to order with fruit, milk and ice cream.", [
+        ("mango", "Mango Paradise", "Mango, coconut, milk and ice cream.", ["Fruity"]),
+        ("tropical", "Tropical Sunset", "Mango, passionfruit, milk and ice cream.", ["Fruity"]),
+        ("strawberrysm", "Strawberry Bliss", "Strawberry, banana, milk and ice cream.", ["Fruity"]),
     ]),
-    ("sweet", "Churros &amp; soft serve", "Our sweet signatures. Crisp, golden and made to be shared.", [
-        ("churroscoffee", "Golden churros", "Crisp, golden and dusted with sugar. Perfect with a coffee.", ["Signature", "Great to share"]),
-        ("softserve", "Soft serve", "Classic creamy soft serve in a cone.", ["Sweet treat"]),
-        ("sundae", "Sundae", "Soft serve with your favourite toppings.", ["Sweet treat"]),
+    ("frappes", "Frappes", "Icy, creamy and blended until smooth.", [
+        ("frappe", "Latte Dream", "A creamy blended coffee frappe.", ["Coffee", "Blended"]),
+        ("chocfrappe", "Choco Delight", "Blended chocolate, rich and frosty.", ["Chocolate", "Blended"]),
+        ("strawberrysm", "Strawberry Velvet", "Sweet strawberry, blended smooth.", ["Fruity", "Blended"]),
+        ("cookiefrappe", "Cookies and Cream", "Crushed cookies blended with cream.", ["Blended"]),
+        ("caramelfrappe", "Caramel Crush", "Golden caramel, blended and icy.", ["Blended"]),
+        ("caramelfrappe", "Salted Caramel", "Sweet and salty caramel, blended smooth.", ["Blended"]),
     ]),
-    ("cakes", "Cakes &amp; sweets", "From our display cabinet, made for every occasion. When they're gone, they're gone.", [
-        ("cake", "Cakes", "Beautiful cakes by the slice. Celebration cakes made to order.", ["Order ahead"]),
-        ("macarons", "Individual sweets", "Little treats from the cabinet, changing every day.", ["Sweet treat"]),
-        ("cakedisplay", "Tarts &amp; pastries", "A changing selection, baked fresh.", ["Made fresh"]),
+    ("milkshakes", "Milkshakes", "Classic shakes in your favourite flavour.", [
+        ("milkshake", "Milkshake", "Vanilla, caramel, strawberry, chocolate, blue heaven, banana, coffee or lime.", ["Classic"]),
+    ], [("Add malt", "Available"), ("Extra flavour", "Available"), ("Make it a thick shake", "Available")]),
+    ("toasties", "Toasties &amp; bakery", "Freshly made, every day. Toasties available on white or wholemeal bread.", [
+        ("sandwich", "Ham &amp; Cheese Toastie", "Ham and melted cheese, toasted golden.", ["Toasted"]),
+        ("griller2", "Ham, Cheese &amp; Tomato Toastie", "Ham, cheese and tomato, toasted golden.", ["Toasted"]),
+        ("sandwich", "Cheese Toastie", "Simple, melty and golden.", ["Toasted"]),
+        ("hccroissant", "Ham &amp; Cheese Croissant", "A buttery croissant filled with ham and cheese.", ["Bakery"]),
+    ]),
+    ("grillers", "Grillers", "Hearty fillings with melted tasty cheese in a toasted Turkish roll.", [
+        ("griller", "Chipotle Chicken Griller", "Diced chicken marinated in southwest chipotle sauce, with avocado spread and melted tasty cheese in a Turkish roll.", ["Turkish roll"]),
+        ("griller2", "Turkey Cranberry Griller", "Sliced turkey with honey mustard and cranberry sauce, with melted tasty cheese in a Turkish roll.", ["Turkish roll"]),
+        ("griller", "Pulled Beef Griller", "Pulled beef with caramelised onion sauce, southwest chipotle sauce and melted tasty cheese in a Turkish roll.", ["Turkish roll"]),
+    ]),
+    ("churros", "Golden churros", "Our sweet signature. Crisp, golden and made to be shared.", [
+        ("churroscoffee", "Churros &amp; dip", "3 churros + 1 dip, 4 churros + 1 dip, 6 churros + 2 dips or 9 churros + 2 dips.", ["Signature", "Great to share"]),
+        ("churroscoffee", "Golden Churro Basket", "A basket of golden churros, served with vanilla ice cream.", ["Great to share"]),
+    ], [("Dipping sauces", "Milk chocolate · White chocolate · Strawberry cream"), ("Add a little extra", "Biscoff or Nutella")]),
+    ("fries", "Sparrow fries", "Crispy, golden and seasoned your way.", [
+        ("fries", "Sparrow Fries", "Regular or large.", ["Great to share"]),
+    ], [("Season with", "Herb salt · Chicken salt · Sea salt"), ("Add a sauce", "Available")]),
+    ("softserve", "Soft serve", "A cool and creamy treat.", [
+        ("softserve", "Classic Vanilla Cone", "Creamy vanilla soft serve in a cone.", ["Sweet treat"]),
+        ("sundae", "Sundae", "Choose from chocolate, caramel, strawberry or Biscoff.", ["Sweet treat"]),
+    ]),
+    ("bakery", "Bakery favourites", "From our cabinet, baked and ready to enjoy.", [
+        ("pies", "Pies &amp; savouries", "A selection of pies and savouries.", ["Savoury"]),
+        ("bananabread", "Banana Bread", "A café classic.", ["Sweet"]),
+        ("raisintoast", "Raisin Toast", "A café favourite.", ["Sweet"]),
+        ("scones", "Scones", "Freshly baked scones.", ["Sweet"]),
+        ("almondcroissant", "Almond Croissant", "Flaky and filled with almond cream.", ["Sweet", "Contains nuts"]),
     ]),
 ]
 good_to_know = [("Takeaway", "Everything on the menu"), ("Dietary requirements", "Just ask, we have options"),
@@ -380,14 +461,17 @@ def mitem(key, name, note, tags):
 </article>'''
 
 menu_html = ""
-for key, title, sub, items in menu_cats:
+for cat in menu_cats:
+    key, title, sub, items = cat[:4]
+    extras = cat[4] if len(cat) > 4 else []
+    extra_html = ('<div class="kvlist kvlist--extras">' + "".join(f'<div class="kv"><span>{k}</span><span>{v}</span></div>' for k, v in extras) + '</div>') if extras else ""
     menu_html += f'''<section class="mcat" id="{key}" aria-labelledby="{key}-h">
   <div class="wrap mcat__grid">
     <div class="mcat__left">
       <h2 class="mcat__title" id="{key}-h" data-reveal>{title}</h2>
       <p class="mcat__text" data-reveal>{sub}</p>
     </div>
-    <div class="mcat__list">{"".join(mitem(*i) for i in items)}</div>
+    <div class="mcat__list">{"".join(mitem(*i) for i in items)}{extra_html}</div>
   </div>
 </section>'''
 gtk_rows = "".join(f'<div class="kv" data-reveal><span>{k}</span><span>{v}</span></div>' for k, v in good_to_know)
@@ -405,7 +489,7 @@ menu_html += f'''<section class="mcat" id="good-to-know" aria-labelledby="gtk-h"
 </section>'''
 
 menu = head(f'Menu · {BIZ["name"]}, Sunbury',
-            f'The {BIZ["name"]} menu: coffee, matcha, Raffaello hot chocolate, iced drinks, toasted sandwiches, golden fries, golden churros, soft serve, cakes and sweets.',
+            f'The {BIZ["name"]} menu: coffee, signature drinks, iced drinks, smoothies, frappes, milkshakes, toasties, grillers, golden churros, Sparrow fries, soft serve and bakery favourites.',
             "menu.html") + nav("menu.html") + f'''<main>
 <section class="mhead">
   <div class="wrap mhead__grid">
