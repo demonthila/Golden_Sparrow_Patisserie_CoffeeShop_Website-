@@ -10,6 +10,7 @@ import json, os
 OUT = os.path.dirname(os.path.abspath(__file__))
 
 BIZ = {
+    "instagram": "https://www.instagram.com/invites/contact/?utm_content=4iaiwdz&fqnt=200skti3hcl2",
     "name": "Golden Sparrow Patisserie",
     "short": "golden sparrow",
     "tagline": "A little sweetness for every occasion",
@@ -105,6 +106,10 @@ def photo(key, alt, w=1200, eager=False, cls=""):
     return (f'<div class="ph {cls}"><img src="{src(key, w)}" srcset="{src(key, w // 2)} {w // 2}w, {src(key, w)} {w}w" '
             f'sizes="(max-width: 760px) 100vw, 50vw" alt="{alt}" {load}></div>')
 
+IG_ICON = '<svg class="ig-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" class="ig-dot"/></svg>'
+def ig_link(text="Follow us on Instagram", cls="ig"):
+    return f'<a class="{cls}" href="{BIZ["instagram"]}" target="_blank" rel="noopener">{IG_ICON}<span>{text}</span></a>'
+
 def hours_rows():
     return "".join(f'<tr data-day="{d}"><td>{n}</td><td>{h}</td></tr>' for n, d, h in HOURS)
 
@@ -144,7 +149,7 @@ def head(title, desc, page, extra=""):
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{{var n=(performance.getEntriesByType('navigation')[0]||{{}}).type,r=document.referrer,i=n==='reload'||!r||new URL(r).origin!==location.origin;if(!i)document.documentElement.classList.add('intro-done')}}catch(e){{}}</script>
-<link rel="stylesheet" href="assets/style.css?v=16">
+<link rel="stylesheet" href="assets/style.css?v=17">
 {schema()}{extra}
 </head>
 <body>
@@ -166,7 +171,7 @@ def nav(active):
     <button class="nav__toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
   </div>
 </header>
-<nav class="overlay" aria-label="Mobile">{mobile}<a class="btn" href="contact.html">Visit us <span class="arrow">→</span></a></nav>
+<nav class="overlay" aria-label="Mobile">{mobile}<a class="btn" href="contact.html">Visit us <span class="arrow">→</span></a>{ig_link("Instagram", "ig ig--nav")}</nav>
 '''
 
 def footer():
@@ -175,6 +180,7 @@ def footer():
     <div class="footer__intro" data-reveal>
       <p class="footer__tag">A little café and patisserie at East Village in Sunbury.</p>
       <p class="status" data-open><span class="dot"></span>Open today</p>
+      {ig_link()}
     </div>
     <div class="footer__col" data-reveal>
       <h4>Visit</h4>
@@ -198,11 +204,11 @@ def footer():
   </div>
   <div class="wrap footer__bottom">
     <span>© <span data-year>2026</span> {BIZ["name"]}. All rights reserved.</span>
-    <span class="footer__links"><a href="contact.html">Contact</a><a href="https://www.novalinkinnovations.com">Website by NovaLink</a></span>
+    <span class="footer__links"><a href="{BIZ["instagram"]}" target="_blank" rel="noopener">Instagram</a><a href="contact.html">Contact</a><a href="https://www.novalinkinnovations.com">Website by NovaLink</a></span>
   </div>
 </footer>
 <script src="assets/js/lenis.min.js"></script>
-<script src="assets/main.js?v=14"></script>
+<script src="assets/main.js?v=15"></script>
 </body>
 </html>
 '''
@@ -254,7 +260,7 @@ def gallery():
     return f'''<section class="section gal" aria-labelledby="gal-title">
   <div class="wrap head3">
     <h2 class="h2" id="gal-title" data-reveal>From our counter</h2>
-    <div class="head3__side"><p class="body" data-reveal>The smell of fresh coffee, the hiss of the milk and a cabinet full of sweets. Drag to look around.</p></div>
+    <div class="head3__side"><p class="body" data-reveal>The smell of fresh coffee, the hiss of the milk and a cabinet full of sweets. Drag to look around.</p><p data-reveal>{ig_link("See more on Instagram", "ig ig--link")}</p></div>
   </div>
   <div class="gal__track" data-stagger=".08">{cards}</div>
 </section>'''
@@ -651,6 +657,7 @@ contact = head(f'Contact · {BIZ["name"]}, Sunbury',
       <div data-reveal><h2 class="eyebrow">Visit</h2><p>{ADDR}</p><p class="small" style="color:var(--muted-2)">Just outside Woolies. Free parking.</p></div>
       <div data-reveal><h2 class="eyebrow">Call</h2><p><a href="tel:{BIZ["phone"].replace(" ", "")}">{BIZ["phone"]}</a></p></div>
       <div data-reveal><h2 class="eyebrow">Email</h2><p><a href="mailto:{BIZ["email"]}">{BIZ["email"]}</a></p></div>
+      <div data-reveal><h2 class="eyebrow">Follow us</h2><p>{ig_link("Golden Sparrow on Instagram")}</p><p class="small" style="color:var(--muted-2);margin-top:6px">New treats, specials and behind the counter.</p></div>
       <div data-reveal><h2 class="eyebrow">Opening hours</h2><table class="hours"><tbody>{hours_rows()}</tbody></table><p class="small" style="color:var(--muted-2);margin-top:10px">Public holiday hours may vary.</p></div>
     </aside>
   </div>

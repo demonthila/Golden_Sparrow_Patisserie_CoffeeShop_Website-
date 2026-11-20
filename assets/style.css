@@ -593,3 +593,14 @@ body { background: var(--paper); }
   .mf__chips::-webkit-scrollbar { display: none; }
   .mf__chip { height: 36px; padding: 0 14px; font-size: 13px; }
 }
+
+/* ---------- Instagram links ---------- */
+.ig { display: inline-flex; align-items: center; gap: 10px; color: inherit; text-decoration: none; font-size: 15px; transition: opacity .25s, color .25s; }
+.ig:hover { color: var(--gold); }
+.ig-icon { width: 20px; height: 20px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.7; }
+.ig-icon .ig-dot { fill: currentColor; stroke: none; }
+.footer__intro .ig { margin-top: 18px; }
+.ig--link { font-size: 16px; border-bottom: 1px solid currentColor; padding-bottom: 4px; margin-top: 16px; }
+.ig--link .ig-icon { width: 18px; height: 18px; }
+.ig--nav { margin-top: 20px; font-size: 18px; }
+.contact__info .ig { font-size: inherit; }
