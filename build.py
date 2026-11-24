@@ -46,14 +46,14 @@ IMG = {
     "icedmatcha": "photo-1717603545758-88cc454db69b",
     "raffaello": "photo-1762411245614-e0f145ba7183",
     "icedchoc": "photo-1559329187-79d04171a646",
-    "icedlatte": "photo-1461023058943-07fcbe16d735",
+    "icedlatte": "assets/img/menu/iced-latte.webp",  # real photo from Vani
     "chai": "photo-1561336526-2914f13ceb36",
     "churros": "photo-1767489386700-cb3dbcbab13d",
-    "churroscoffee": "photo-1702896287488-0a83b9baaab9",
+    "churroscoffee": "assets/img/menu/churros.webp",  # real photo from Vani
     "fries": "photo-1630384060421-cb20d0e0649d",
     "softserve": "photo-1697125138277-962ef4126de4",
     "sundae": "photo-1695886855588-47117bca2fe6",
-    "sandwich": "photo-1528736235302-52922df5c122",
+    "sandwich": "assets/img/menu/ham-cheese-toastie.webp",  # real photo from Vani
     "cakedisplay": "photo-1583338917451-face2751d8d5",
     "cake": "photo-1571115177098-24ec42ed204d",
     "macarons": "photo-1558326567-98ae2405596b",
@@ -62,6 +62,10 @@ IMG = {
     "barista": "photo-1532713107108-dfb5d8d2fc42",
     "shopfront": "photo-1521017432531-fbd92d768814",
     "footer": "photo-1762686852371-763b689910b2",
+    "turkeygriller": "assets/img/menu/turkey-cranberry-griller.webp",  # real photo from Vani
+    "pulledbeef": "assets/img/menu/pulled-beef-griller.webp",  # real photo from Vani
+    "cheesecake": "assets/img/menu/raspberry-white-choc-cheesecake.webp",  # real photo from Vani
+    "peartart": "assets/img/menu/lemon-lime-pear-tart.webp",  # real photo from Vani
     "espresso": "photo-1475296204602-08d15839e95f",
     "mango": "photo-1623065422902-30a2d299bbe4",
     "tropical": "photo-1778449270554-3e5b17cfebc6",
@@ -73,10 +77,10 @@ IMG = {
     "milkshake": "photo-1553787499-6f9133860278",
     "griller": "photo-1655279562015-047c3da9a271",
     "griller2": "photo-1621852004158-f3bc188ace2d",
-    "hccroissant": "photo-1530610476181-d83430b64dcd",
-    "bananabread": "photo-1767065887793-f68f736ea9d6",
+    "hccroissant": "assets/img/menu/ham-cheese-croissant.webp",  # real photo from Vani
+    "bananabread": "assets/img/menu/banana-bread.webp",  # real photo from Vani
     "scones": "photo-1589114471223-dec0d8d572c6",
-    "pies": "photo-1545668855-b923f0176935",
+    "pies": "assets/img/menu/beef-pie.webp",  # real photo from Vani
     "almondcroissant": "photo-1759303380903-11154bc5d5bf",
     "raisintoast": "photo-1782846105211-5543693408ce",
     "affogato": "photo-1696522692156-7340b681c3bb",
@@ -103,6 +107,8 @@ def src(key, w=1200):
 
 def photo(key, alt, w=1200, eager=False, cls=""):
     load = 'fetchpriority="high"' if eager else 'loading="lazy" decoding="async"'
+    if "/" in IMG[key]:  # local photo
+        return f'<div class="ph {cls}"><img src="{src(key)}" alt="{alt}" {load}></div>'
     return (f'<div class="ph {cls}"><img src="{src(key, w)}" srcset="{src(key, w // 2)} {w // 2}w, {src(key, w)} {w}w" '
             f'sizes="(max-width: 760px) 100vw, 50vw" alt="{alt}" {load}></div>')
 
@@ -149,7 +155,7 @@ def head(title, desc, page, extra=""):
 <meta property="og:image" content="{BIZ["url"]}/assets/img/logo-full.png">
 <link rel="preload" href="assets/fonts/CabinetGrotesk-Medium.woff2" as="font" type="font/woff2" crossorigin>
 <script>try{{var n=(performance.getEntriesByType('navigation')[0]||{{}}).type,r=document.referrer,i=n==='reload'||!r||new URL(r).origin!==location.origin;if(!i)document.documentElement.classList.add('intro-done')}}catch(e){{}}</script>
-<link rel="stylesheet" href="assets/style.css?v=17">
+<link rel="stylesheet" href="assets/style.css?v=18">
 {schema()}{extra}
 </head>
 <body>
@@ -357,7 +363,7 @@ home = head(f'{BIZ["name"]} · Café & patisserie in East Village, Sunbury',
     </div>
     <div class="cards cards--3" data-stagger=".1">
       {card("churroscoffee", "Golden churros", "Crisp, golden and dusted with sugar. Our sweet signature, best with a coffee.")}
-      {card("cake", "Cakes for every occasion", "Birthdays, celebrations or just because. Ask us about special occasion cakes.")}
+      {card("cheesecake", "Cakes for every occasion", "Birthdays, celebrations or just because. Ask us about special occasion cakes.")}
       {card("pastries", "Catering &amp; platters", "Customised platters for groups, events and the office.")}
     </div>
   </div>
@@ -429,8 +435,8 @@ menu_cats = [
     ]),
     ("grillers", "Grillers", "Hearty fillings with melted tasty cheese in a toasted Turkish roll.", [
         ("griller", "Chipotle Chicken Griller", "Diced chicken marinated in southwest chipotle sauce, with avocado spread and melted tasty cheese in a Turkish roll.", ["Turkish roll"]),
-        ("griller2", "Turkey Cranberry Griller", "Sliced turkey with honey mustard and cranberry sauce, with melted tasty cheese in a Turkish roll.", ["Turkish roll"]),
-        ("griller", "Pulled Beef Griller", "Pulled beef with caramelised onion sauce, southwest chipotle sauce and melted tasty cheese in a Turkish roll.", ["Turkish roll"]),
+        ("turkeygriller", "Turkey Cranberry Griller", "Sliced turkey with honey mustard and cranberry sauce, with melted tasty cheese in a Turkish roll.", ["Turkish roll"]),
+        ("pulledbeef", "Pulled Beef Griller", "Pulled beef with caramelised onion sauce, southwest chipotle sauce and melted tasty cheese in a Turkish roll.", ["Turkish roll"]),
     ]),
     ("churros", "Golden churros", "Our sweet signature. Crisp, golden and made to be shared.", [
         ("churroscoffee", "Churros &amp; dip", "3 churros + 1 dip, 4 churros + 1 dip, 6 churros + 2 dips or 9 churros + 2 dips.", ["Signature", "Great to share"]),
@@ -444,8 +450,10 @@ menu_cats = [
         ("sundae", "Sundae", "Choose from chocolate, caramel, strawberry or Biscoff.", ["Sweet treat"]),
     ]),
     ("bakery", "Bakery favourites", "From our cabinet, baked and ready to enjoy.", [
-        ("pies", "Pies &amp; savouries", "A selection of pies and savouries.", ["Savoury"]),
+        ("pies", "Pies &amp; savouries", "A selection of pies and savouries, including our classic beef pie.", ["Savoury"]),
         ("bananabread", "Banana Bread", "A café classic.", ["Sweet"]),
+        ("cheesecake", "Raspberry White Chocolate Cheesecake", "A creamy white chocolate cheesecake slice with raspberry.", ["Sweet", "Cake slice"]),
+        ("peartart", "Lemon, Lime &amp; Pear Tart", "A zesty citrus and pear tart, served by the slice.", ["Sweet", "Cake slice"]),
         ("raisintoast", "Raisin Toast", "A café favourite.", ["Sweet"]),
         ("scones", "Scones", "Freshly baked scones.", ["Sweet"]),
         ("almondcroissant", "Almond Croissant", "Flaky and filled with almond cream.", ["Sweet", "Contains nuts"]),
