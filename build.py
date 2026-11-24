@@ -18,7 +18,7 @@ BIZ = {
     "suburb": "Sunbury",
     "state": "VIC",
     "postcode": "3429",
-    "phone": "0452 209 929",
+    "phone": "03 8088 0394",
     "email": "admin@goldensparrowpatisserie.com.au",
     "url": "https://www.goldensparrowpatisserie.com.au",
     "maps": "https://www.google.com/maps/search/?api=1&query=Golden+Sparrow+Patisserie+East+Village+Sunbury",

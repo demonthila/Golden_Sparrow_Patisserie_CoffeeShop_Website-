@@ -215,7 +215,7 @@
   if (msg) {
     var q = location.search;
     if (/sent=1/.test(q)) { msg.hidden = false; msg.className = 'form__msg ok'; msg.textContent = "Thank you! Your message has been sent. We'll get back to you soon."; }
-    else if (/error=1/.test(q)) { msg.hidden = false; msg.className = 'form__msg err'; msg.textContent = 'Sorry, something went wrong. Please check your details or call us on 0452 209 929.'; }
+    else if (/error=1/.test(q)) { msg.hidden = false; msg.className = 'form__msg err'; msg.textContent = 'Sorry, something went wrong. Please check your details or call us on 03 8088 0394.'; }
     var form = msg.closest('form');
     form.addEventListener('submit', function (e) {
       if (!form.checkValidity()) { e.preventDefault(); msg.hidden = false; msg.className = 'form__msg err'; msg.textContent = 'Please fill in your name, a valid email and your message.'; }
